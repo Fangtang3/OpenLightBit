@@ -44,17 +44,16 @@ try:
     cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
     safe_file_write('cloud.json', """{
-  "QCloud_Secret_id": "",
-  "QCloud_Secret_key": "",
-  "MySQL_Pwd": "",
-  "MySQL_Port": 3306,
-  "MySQL_Host": "localhost",
-  "MySQL_db": "database",
-  "MySQL_User": "root"
-  "Redis_Host": "localhost",
-  "Redis_port": 6379,
-  "snao_key": ""
-}""")
+    "QCloud_Secret_id": "",  # QCloud用户ID，可留空
+    "QCloud_Secret_key": "", # QCloud密钥ID，可留空
+    "MySQL_Pwd": "", # 你的MySQL密码
+    "MySQL_Port": 3306, # 你的MySQL端口，一般都是3306，如果是其他的需要修改
+    "MySQL_Host": "localhost", # MySQL主机
+    "MySQL_db": "", # MySQL数据库名称
+    "Redis_Host": "localhost", # Redis主机
+    "Redis_port": 6379  # Redis主机端口，一般都是6379
+  }
+# 最后配置完后，请把所有的注释和#全部删除，避免发生错误（包括本条)""")
     logger.error(
         'cloud.json 未创建，程序已自动创建，请参考 https://github.com/daizihan233/KuoHuBit/issues/17 填写该文件的内容')
     sys.exit(1)
@@ -62,9 +61,18 @@ try:
     dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 except FileNotFoundError:
     safe_file_write('dynamic_config.yaml', """mute:
-- null
+- 767949862
+- 556482025
+- 781601227
+- 689165612
+- 211126861
+- 643981003
+- 347997878
+- 772177022
 word:
-- null""")
+- 620563816
+- 469903354
+- 643981003""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
 
 
