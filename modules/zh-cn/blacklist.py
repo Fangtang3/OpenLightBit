@@ -15,8 +15,8 @@ import botfunc
 
 channel = Channel.current()
 channel.name("黑名单")
-channel.description("屌你老母")
-channel.author("HanTools")
+channel.description("操你吗的")
+channel.author("Emerald-AM9")
 
 
 @listen(GroupMessage)
@@ -33,7 +33,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
             await botfunc.run_sql('INSERT INTO blacklist(uid, op) VALUES (%s, %s)',
                                   (i.target, event.sender.id))
         except Exception as err:
-            logger.warning(f'{i} 未能成功加入数据库：{err}')
+            logger.warning(f'{i} Blacklist failed during a database error：{err}')
             msg += f'    数据库：【错误：{err}】\n'
         else:
             msg += '    数据库：成功\n'
@@ -43,7 +43,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
                 event.sender.id
             )
         except PermissionError:
-            logger.warning(f'{i} 未能成功踢出：权限错误')
+            logger.warning(f'{i} Kick failed during a PermissionError')
             msg += '    踢出：【错误：无权踢出】'
         else:
             msg += '    踢出：成功'
