@@ -106,7 +106,7 @@ with saya.module_context():
             if module[1] == 'NO_USE':
                 continue
             module = '.'.join(module)[:-3]
-            logger.info(f'{module} 将被载入')
+            logger.info(f'Loading module {module}')
             saya.require(module)
 
 for module, channel in saya.channels.items():
@@ -115,5 +115,5 @@ for module, channel in saya.channels.items():
     logger.info(f"author: {' '.join(channel.meta['author'])}")
     logger.info(f"description: {channel.meta['description']}")
 
-logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
+logger.success('Congratulations! Server is fully up and running.')
 app.launch_blocking()
