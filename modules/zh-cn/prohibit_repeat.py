@@ -23,8 +23,8 @@ from botfunc import r
 
 channel = Channel.current()
 channel.name("防刷屏")
-channel.description("人类可真无聊")
-channel.author("HanTools")
+channel.description("是哪种人没事干像个傻逼一样刷屏啊（恼）")
+channel.author("Emerald-AM9")
 dyn_config = 'dynamic_config.yaml'
 hash_name = "bot_repeat_record"
 
@@ -50,7 +50,7 @@ async def repeat_record(app: Ariadne, group: Group, member: Member, message: Mes
                             await app.send_message(group, MessageChain(Plain("boom！一声枪响之后，"), At(member.id),
                                                                        Plain(f' 被禁言了 {limit_time} 秒')))
                         except PermissionError:
-                            logger.warning(f'机器人权限过低，无法禁言 {member.id}')
+                            logger.warning(f'Mute failed during a PermissionError {member.id}')
                 else:
                     r.hset(hash_name, f'{group.id},{member.id}', f"1,{time.time()},{urllib.parse.quote(str(message))}")
             else:
