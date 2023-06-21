@@ -22,7 +22,7 @@ import botfunc
 channel = Channel.current()
 channel.name("面包厂")
 channel.description("好吃")
-channel.author("HanTools")
+channel.author("Emerald-AM9")
 get_data_sql = '''SELECT id, level, time, bread, experience FROM bread WHERE id = %s'''
 
 
