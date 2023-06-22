@@ -7,7 +7,6 @@ rand_sents = {
     "zh-cn": json.load(open('./jsons/zh-cn/rand_sents.json', 'r', encoding='UTF-8')),
     "zh-hk": json.load(open('./jsons/zh-hk/rand_sents_hk.json', 'r', encoding='UTF-8')),
 }
-voices = yaml.safe_load(open('./yamls/Voices.yaml', 'r', encoding='UTF-8'))
 def bot_config(name: str):
     try:
         return global_setting[name]
