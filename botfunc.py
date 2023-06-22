@@ -9,7 +9,7 @@ import requests_cache
 import yaml
 from loguru import logger
 
-
+print ("Initializing data...")
 def safe_file_read(filename: str, encode: str = "UTF-8", mode: str = "r") -> str or bytes:
     if mode == 'r':
         with open(filename, mode, encoding=encode) as file:
