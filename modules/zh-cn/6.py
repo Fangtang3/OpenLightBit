@@ -196,8 +196,7 @@ async def six_six_six(app: Ariadne, group: Group, event: GroupMessage, message: 
                 await app.send_group_message(target=group,
                                              message=MessageChain(
                                                  [At(event.sender.id),
-                                                  Image(path=os.path.abspath(os.curdir) + '/img/6/' + random.choice(
-                                                      img))]),
+                                                  Plain("6"),
                                              quote=event.source)
             break
 
