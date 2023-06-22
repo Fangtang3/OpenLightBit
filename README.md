@@ -23,3 +23,5 @@
     - [Abjust/2kbot-py](https://github.com/Abjust/2kbot-py)
 - [ObsidianCatalina](https://github.com/ObsidianCatalina/)
     - [ObsidianCatalina/ObsidianBot](https://github.com/ObsidianCatalina/ObsidianBot)
+
+Based on https://github.com/daizihan233/KuoHuBit and https://github.com/ObsidianCatalina/ObsidianBot
