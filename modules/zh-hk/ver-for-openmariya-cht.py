@@ -16,7 +16,7 @@ channel = Channel.current()
 channel.name("版本查詢")
 channel.description("查看機器人當前版本")
 channel.author("ObsidianCatalina")
-txt = "當前裝載版本為OpenLightBit 2.0.1(Beta #52)(with Mariya Stable 1.2.7 plugins compatibility)\n"
+txt = "當前裝載版本為OpenLightBit 2.0.2(Beta #58)(with Mariya Stable 1.2.7 plugins compatibility)\n"
 
 
 @channel.use(
