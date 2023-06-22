@@ -6,8 +6,8 @@ build-backend = "pdm.pep517.api"
 
 
 [project]
-name = "KuoHuBit"
-version = "114514.1919810"
+name = "OpenLightBit"
+version = "2.0-hatsu"
 description = "A QQ Bot"
 authors = [
     { name = "HanTools233", email = "y066ydg5@duck.com" },
