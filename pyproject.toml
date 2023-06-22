@@ -12,7 +12,7 @@ description = "A QQ Bot"
 authors = [
     { name = "HanTools233", email = "y066ydg5@duck.com" },
     { name = "HanTools233", email = "hantools@foxmail.com" },
-    { name = "Emerald-AM9", email = "emeraldam9@msst.xyz" },
+    { name = "Emerald-AM9", email = "emeraldam9@msst.xyz" }
 ]
 dependencies = [
     "graia-ariadne[standard]<1.0.0,>=0.10.2",
