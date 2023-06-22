@@ -19,11 +19,14 @@ from loguru import logger
 import botfunc
 import cache_var
 
+print ("Starting OpenLightBit 2.2(Tongtong) with Mariya Stable 1.2.7...")
+
 saya = create(Saya)
 app = Ariadne(
     connection=config(
         botfunc.get_config('qq'),
         botfunc.get_config('verifyKey'),
+        logger.info (f'Trying to make you log in...')
         HttpClientConfig(host=botfunc.get_config('mirai_api_http')),
         WebsocketClientConfig(host=botfunc.get_config('mirai_api_http')),
     ),
@@ -87,6 +90,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` (
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_0900_ai_ci" """)
 
 # 载入敏感词列表
+logger.info(f'Loading sensitive words...')
 cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT gid FROM no_six')
@@ -106,14 +110,14 @@ with saya.module_context():
             if module[1] == 'NO_USE':
                 continue
             module = '.'.join(module)[:-3]
-            logger.info(f'Loading module {module}')
+            logger.info(f'Enabling module {module}...')
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.info(f"module: {module}")
-    logger.info(f"name: {channel.meta['name']}")
-    logger.info(f"author: {' '.join(channel.meta['author'])}")
-    logger.info(f"description: {channel.meta['description']}")
+    logger.success(f"module: {module}")
+    logger.success(f"name: {channel.meta['name']}")
+    logger.success(f"author: {' '.join(channel.meta['author'])}")
+    logger.success(f"description: {channel.meta['description']}")
 
 logger.success('Congratulations! Server is fully up and running.')
 app.launch_blocking()
