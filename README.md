@@ -5,6 +5,8 @@
 
 # 关于安全性
 
+[![Security Status](https://www.murphysec.com/platform3/v31/badge/1671890207615565824.svg)](https://www.murphysec.com/console/report/1671890207552651264/1671890207615565824) 
+
 # 其他的机器人
 
 可以学习一下，我也为这些项目做出过贡献<br>
