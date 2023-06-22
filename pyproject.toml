@@ -6,12 +6,13 @@ build-backend = "pdm.pep517.api"
 
 
 [project]
-name = "KuoHuBit"
-version = "114514.1919810"
+name = "OpenLightBit"
+version = "2.0-beta"
 description = "A QQ Bot"
 authors = [
     { name = "HanTools233", email = "y066ydg5@duck.com" },
     { name = "HanTools233", email = "hantools@foxmail.com" },
+    { name = "Emerald-AM9", email = "emeraldam9@msst.xyz" },
 ]
 dependencies = [
     "graia-ariadne[standard]<1.0.0,>=0.10.2",
