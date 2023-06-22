@@ -14,4 +14,6 @@ async def six(response: Response):
 
 
 if __name__ == '__main__':
-    uvicorn.run("botapi:app", port=8989, host='0.0.0.0', reload=True)
+    mica_app_khapi_url = botfunc.get_config('khbit-api-ip')
+    mica_app_khapi_prt = botfunc.get_config('khbit-api-port')
+    uvicorn.run("botapi:app", port={mica_app_khapi_prt}, host='{mica_app_khapi_url}', reload=True)
