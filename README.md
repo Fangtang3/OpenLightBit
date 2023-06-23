@@ -1,7 +1,9 @@
 # OpenLightBit 2
 
 一个很屑的QQBot | 基于 Mirai  Graia 与 [KuoHuBit](https://github.com/daizihan233/KuoHuBit)<br>
-本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源
+本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源<br>
+If you need OpenMariya's multi-language support and using py3.11.x,[please](https://github.com/ObsidianCatalina/ObsidianBot) Incompatible with KuoHuBit plugins
+Py 3.10+ with multi-language support,[please](https://github.com/ltzXiaoYanMo/YanBot-OpenMariya_Edition) Incompatible with KuoHuBit plugins
 
 # 关于安全性
 [![Security Status](https://www.murphysec.com/platform3/v31/badge/1672042323122405376.svg)](https://www.murphysec.com/console/report/1671890207552651264/1672042323122405376) 
