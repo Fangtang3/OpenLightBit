@@ -8,6 +8,8 @@ from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 
+import definer
+
 channel = Channel.current()
 channel.name("eji")
 channel.description("dianaful in khbit")
