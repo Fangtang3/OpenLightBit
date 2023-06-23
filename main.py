@@ -97,7 +97,8 @@ cursor.execute('SELECT gid FROM no_six')
 cache_var.no_6 = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT uid FROM admin')
 if not cursor.fetchall():
-    admin_uid = int(input("未找到任何一个op！请输入你（op）的QQ号："))
+    logger.error('未找到任何一个op！')
+    admin_uid = int(input("请输入你（op）的QQ号："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
 
 conn.close()
@@ -110,14 +111,14 @@ with saya.module_context():
             if module[1] == 'NO_USE':
                 continue
             module = '.'.join(module)[:-3]
-            logger.info(f'Enabling module {module}...')
+            logger.info(f'Loading module {module}')
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.success(f"module: {module}")
-    logger.success(f"name: {channel.meta['name']}")
-    logger.success(f"author: {' '.join(channel.meta['author'])}")
-    logger.success(f"description: {channel.meta['description']}")
+    logger.info(f"module: {module}")
+    logger.info(f"name: {channel.meta['name']}")
+    logger.info(f"author: {' '.join(channel.meta['author'])}")
+    logger.info(f"description: {channel.meta['description']}")
 
-logger.success('Congratulations! Server is fully up and running.')
+logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
 app.launch_blocking()
