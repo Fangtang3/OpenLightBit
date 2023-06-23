@@ -11,8 +11,7 @@ import botmanager
 
 su = botmanager.bot_config('su')
 lang = {
-    "zh_cn": (" Bot默认语言已更改为简体中文(中国大陆)", " 默认语言已是简体中文(中国大陆)，无需更改"),
-    "zh_hk": (" Bot語言已更改為繁體中文（中華人民共和國香港特別行政區）", " 默認語言已是繁體中文（中華人民共和國香港特別行政區），無需更改")
+    "zh_cn": (" Bot默认语言已更改为简体中文(中国大陆)", " 默认语言已是简体中文(中国大陆)，无需更改")
 }
 enable_lang = "zh_cn"
 
@@ -52,8 +51,7 @@ async def Lang_list(app: Ariadne, group: Group, event: GroupMessage):
             group,
             MessageChain(At(event.sender.id),
                          " Installed language:\n"
-                         "Chinese Simplified(China Mainland/PRC)\n"
-                         "Chinese Chinese Traditional(PRC SAR HongKong)")
+                         "Chinese Simplified(China Mainland/PRC)")
         )
     else:
         await app.send_message(group, MessageChain(At(event.sender.id), " You don't have check privileges"))
