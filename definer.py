@@ -42,11 +42,11 @@ def linux_knowledge(name: str):
 #        return None
 
 
-#def rand_sentence(name: str):
-#    try:
-#        return rand_sentence_yaml[name]
-#    except KeyError:
-#        return None
+def rand_sentence(name: str):
+    try:
+        return rand_sentence_yaml[name]
+    except KeyError:
+        return None
 
 
 #def shit(name: str):
