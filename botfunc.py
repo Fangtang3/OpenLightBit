@@ -62,18 +62,9 @@ try:
     dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 except FileNotFoundError:
     safe_file_write('dynamic_config.yaml', """mute:
-- 767949862
-- 556482025
-- 781601227
-- 689165612
-- 211126861
-- 643981003
-- 347997878
-- 772177022
+- none
 word:
-- 620563816
-- 469903354
-- 643981003""")
+- none""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
     dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 try:
