@@ -18,8 +18,11 @@
         - [123Windows31/2kbot](https://github.com/123Windows31/2kbot)
         - [Emerald-AM9/Mica-App-Bot-](https://github.com/Emerald-AM9/Mica-App-Bot-)
             - [emerald-am9/mica-app-extension](https://gitee.com/emerald-am9/mica-app-extension/)
-            - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit/)
     - [Abjust/2kbot-java](https://github.com/Abjust/2kbot-java)
     - [Abjust/2kbot-py](https://github.com/Abjust/2kbot-py)
 - [ObsidianCatalina](https://github.com/ObsidianCatalina/)
     - [ObsidianCatalina/ObsidianBot](https://github.com/ObsidianCatalina/ObsidianBot)
+- [KuoHu](github.com/daizihan233)
+    - [KuoHuBit](github.com/daizihan233/KuoHuBit]
+        - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
+
