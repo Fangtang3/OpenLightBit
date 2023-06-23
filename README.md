@@ -22,7 +22,7 @@
     - [Abjust/2kbot-py](https://github.com/Abjust/2kbot-py)
 - [ObsidianCatalina](https://github.com/ObsidianCatalina/)
     - [ObsidianCatalina/ObsidianBot](https://github.com/ObsidianCatalina/ObsidianBot)
-- [KuoHu](github.com/daizihan233)
-    - [KuoHuBit](github.com/daizihan233/KuoHuBit]
+- [KuoHu](https://github.com/daizihan233)
+    - [KuoHuBit](https://github.com/daizihan233/KuoHuBit)
         - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
 
