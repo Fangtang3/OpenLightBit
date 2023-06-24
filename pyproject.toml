@@ -14,9 +14,9 @@ graiax-silkcoder = {extras = ["ffmpeg"], version = "^0.3.5"}
 includes = []
 [[tool.pdm.source]]
 name = "douban"
-url = "https://pypi.douban.com/simple"
+url = "https://pypi.doubanio.com/simple"
 verify_ssl = true
-default = true
+default = false
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
