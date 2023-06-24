@@ -16,7 +16,6 @@ includes = []
 name = "douban"
 url = "https://pypi.doubanio.com/simple"
 verify_ssl = true
-default = false
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
@@ -50,8 +49,7 @@ dependencies = [
     "numpy>=1.24.2",
     "uvicorn>=0.21.1",
     "fastapi>=0.95.1",
-    "loguru<1.0.0,>=0.6.0",
-    "pyyaml<7.0,>=6.0"
+    "loguru<1.0.0,>=0.6.0"
 ]
 requires-python = ">=3.10,<4.0"
 license = { text = "AGPL-3.0" }
