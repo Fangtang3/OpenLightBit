@@ -18,7 +18,7 @@ channel.author("Emerald-AM9")
 
 r = definer.rand_sentence('rand_sentence')
 # 版本号随机句子的参数
-txt = "当前装载版本:OpenLightBit 2.2.0-alpha.4(Tongtong)(#117)(with Mariya Stable 1.2.7 & some TypeRelease10.3 compatibility)\n质量更新版本:2.2\n紧急更新补丁版本:0\n"
+txt = "当前装载版本:OpenLightBit 2.2.0-alpha.5(Tongtong)(#128)(with Mariya Stable 1.2.7 & some TypeRelease10.3 compatibility)\n质量更新版本:2.2\n紧急更新补丁版本:0\n"
 
 
 @channel.use(
