@@ -13,7 +13,7 @@ rand_sentence_yaml = yaml.safe_load(open('./yamls/rand_sentence.yaml', 'r', enco
 
 #shit_yaml = yaml.safe_load(open('./yamls/shit.yaml', 'r', encoding='utf-8'))
 #settings_yaml = yaml.safe_load(open('./yamls/settings.yaml', 'r', encoding='UTF-8'))
-#global_yaml = yaml.safe_load(open('./yamls/global.yaml','r',encoding='utf-8'))
+global_yaml = yaml.safe_load(open('./yamls/global.yaml','r',encoding='utf-8'))
 #take_menu_yaml = yaml.safe_load(open('./yamls/menu.yaml','r',encoding='utf-8'))
 #def url_config(name: str):
 #    try:
@@ -64,11 +64,11 @@ def rand_sentence(name: str):
 #    except KeyError:
 #        return None
 
-#def bot_global(name: str):
-#    try:
-#        return global_yaml[name]
-#    except KeyError:
-#        return None
+def bot_global(name: str):
+    try:
+        return global_yaml[name]
+    except KeyError:
+        return None
 #def take_menu(name: str):
 #    try:
 #        return take_menu_yaml[name]
