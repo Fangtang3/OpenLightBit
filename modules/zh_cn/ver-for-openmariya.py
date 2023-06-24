@@ -16,7 +16,7 @@ channel = Channel.current()
 channel.name("版本查询")
 channel.description("查看机器人当前版本")
 channel.author("Emerald-AM9")
-txt = "当前装载版本为OpenLightBit 2.1-beta.1(Emma)(#73)(with Mariya Stable 1.2.7 plugins compatibility)\n"
+txt = "当前装载版本为OpenLightBit 2.1-beta.2(Emma)(#79)(with Mariya Stable 1.2.7 plugins compatibility)\n"
 
 
 @channel.use(
