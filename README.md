@@ -6,7 +6,6 @@ If you need OpenMariya's multi-language support and using py3.11.x,[please](http
 Py 3.10+ with multi-language support,[please](https://github.com/ltzXiaoYanMo/YanBot-OpenMariya_Edition) NOTE:<-- Incompatible with KuoHuBit plugins
 
 # 关于安全性
-[![Security Status](https://www.murphysec.com/platform3/v31/badge/1672042323122405376.svg)](https://www.murphysec.com/console/report/1671890207552651264/1672042323122405376) 
 # 其他的机器人
 
 可以学习一下，我也为这些项目做出过贡献<br>
