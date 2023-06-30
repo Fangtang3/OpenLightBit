@@ -17,7 +17,6 @@ authors = [
 [[tool.poetry.source]]
 name = "tx"
 url = "https://mirrors.cloud.tencent.com/pypi/simple"
-default = true
 dependencies = [
     "graia-ariadne[standard]<1.0.0,>=0.10.2",
     "pyyaml<7.0,>=6.0",
