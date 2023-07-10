@@ -19,7 +19,7 @@ from loguru import logger
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.2(Tongtong) with Mariya Stable 1.2.7...")
+print ("Starting OpenLightBit 2.3(Xuanhua) with Mariya Stable 1.2.7...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -97,8 +97,8 @@ cursor.execute('SELECT gid FROM no_six')
 cache_var.no_6 = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT uid FROM admin')
 if not cursor.fetchall():
-    logger.error('未找到任何一个op！')
-    admin_uid = int(input("请输入你（op）的QQ号："))
+    logger.error('未找到任何一个管理！')
+    admin_uid = int(input("请输入主人的QQ号："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
 
 conn.close()
@@ -111,14 +111,14 @@ with saya.module_context():
             if module[1] == 'NO_USE':
                 continue
             module = '.'.join(module)[:-3]
-            logger.info(f'Loading module {module}')
+            logger.info(f'装载模块{module}')
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.info(f"插件文件: {module}")
-    logger.info(f"插件名称: {channel.meta['name']}")
-    logger.info(f"插件作者: {' '.join(channel.meta['author'])}")
-    logger.info(f"插件描述: {channel.meta['description']}")
+    logger.info(f"模块{module}的信息如下：")
+    logger.info(f"名称: {channel.meta['name']}")
+    logger.info(f"作者: {' '.join(channel.meta['author'])}")
+    logger.info(f"简介: {channel.meta['description']}")
 
 logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
 app.launch_blocking()
