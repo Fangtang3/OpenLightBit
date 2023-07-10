@@ -22,7 +22,7 @@ ban_user : [
     logger.error('./yamls/General.yaml 未创建，程序已自动创建，请填写该文件的内容')
     sys.exit(1)
 
-rand_sents = json.load(open('./jsons/zh-cn/rand_sents.json','r',encoding='UTF-8'))
+rand_sents = yaml.safe_load(open('./yamls/rand_sentence.yaml','r',encoding='UTF-8'))
 
 voices = yaml.safe_load(open('./yamls/Voices.yaml', 'r', encoding='UTF-8'))
 def bot_config(name: str):
