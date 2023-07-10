@@ -10,9 +10,9 @@ import botmanager
 import langmanager
 su = botmanager.bot_config('su')
 channel = Channel.current()
-channel.name("Factory Test -REC")
-channel.description("Recovery Bot All settings")
-channel.author("ObsidianCatalina")
+channel.name("重置")
+channel.description("重置所有设置（OpenMariya）")
+channel.author("Emerald-AM9")
 channel = Channel.current()
 
 
@@ -27,9 +27,9 @@ async def rec(app: Ariadne, group: Group, event: GroupMessage, message: MessageC
         langmanager.enable_lang = "zh_cn"
         await app.send_message(
                 group,
-                MessageChain(At(event.sender.id), "All settings is restored to normal!")
+                MessageChain(At(event.sender.id), "OpenMiriya设定已重置!")
             )
        else:
-            await app.send_message(group, MessageChain(At(event.sender.id), "You don't have factory test permissions"))
+            await app.send_message(group, MessageChain(At(event.sender.id), "权限不足！"))
     else:
-        await app.send_message(group, MessageChain(At(event.sender.id), f" Argument '{str(message)}' does not exist"))
+        await app.send_message(group, MessageChain(At(event.sender.id), f"无效参数：'{str(message)}'。"))
