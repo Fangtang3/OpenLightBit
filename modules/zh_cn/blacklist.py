@@ -1,4 +1,4 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
+#  本项目遵守 AGPL-3.0 协议，KuoHuBit地址：https://github.com/daizihan233/MiraiHanBot
 
 import pymysql.err
 from graia.amnesia.message import MessageChain
@@ -7,6 +7,7 @@ from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.event.mirai import MemberJoinEvent
 from graia.ariadne.message.element import At
 from graia.ariadne.message.parser.base import DetectPrefix
+from graia.ariadne.model import Group, Member
 from graia.ariadne.util.saya import listen
 from graia.saya import Channel
 from loguru import logger
@@ -21,7 +22,7 @@ channel.author("Emerald-AM9")
 
 @listen(GroupMessage)
 async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = DetectPrefix("拉黑")):
-    admins = botfunc.get_all_admin()
+    admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
         return
     msg = "--- 执行结果 ---\n"
@@ -98,3 +99,17 @@ async def nmms(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
         await app.send_message(event.sender.group, "好乐！")
     except Exception as err:
         await app.send_message(event.sender.group, f"Umm，{err}")
+
+
+@listen(MemberJoinEvent)
+async def kick(app: Ariadne, group: Group, member: Member, event: MemberJoinEvent):
+    black = await botfunc.get_all_sb()
+    if event.inviter is None and (member.id in black):
+        await app.kick_member(
+            group=group,
+            member=member
+        )
+        await app.send_message(
+            target=group,
+            message=f'{member.id} 已在黑名单内'
+        )
