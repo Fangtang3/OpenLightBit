@@ -2,28 +2,24 @@
 
 一个很屑的QQBot | 基于 Mirai 与 Graia<br>
 本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源
-
-# 关于安全性
-
-[![Security Status](https://www.murphysec.com/platform3/v31/badge/1671890207615565824.svg)](https://www.murphysec.com/console/report/1671890207552651264/1671890207615565824) 
+OpenLightBit 2.0已经停止支持，请使用OpenLightBit 2.2!
 
 # 其他的机器人
-
-可以学习一下，我也为这些项目做出过贡献<br>
-~~如果代码写得好那么我一定做出过贡献~~<br>
-~~如果代码像坨屎山一样那绝对跟我没关系~~
-
-- [daizihan233](https://kgithub.com/daizihan233/)
-    - [daizihan233/KuoHuBit](https://kgithub.com/daizihan233/KuoHuBit/)
-- [Abjust](https://github.com/Abjust/)
-    - [Abjust/2kbot](https://github.com/Abjust/2kbot)
-        - [123Windows31/2kbot](https://github.com/123Windows31/2kbot)
-        - [Emerald-AM9/Mica-App-Bot-](https://github.com/Emerald-AM9/Mica-App-Bot-)
-            - [emerald-am9/mica-app-extension](https://gitee.com/emerald-am9/mica-app-extension/)
-            - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit/)
-    - [Abjust/2kbot-java](https://github.com/Abjust/2kbot-java)
-    - [Abjust/2kbot-py](https://github.com/Abjust/2kbot-py)
-- [ObsidianCatalina](https://github.com/ObsidianCatalina/)
-    - [ObsidianCatalina/ObsidianBot](https://github.com/ObsidianCatalina/ObsidianBot)
-
-Based on https://github.com/daizihan233/KuoHuBit and https://github.com/ObsidianCatalina/ObsidianBot
+- [Abjust](https://kgithub.com/Abjust/)
+    - [~~Abjust/2kbit-cs~~](https://kgithub.com/Abjust/2kbit-cs)
+        - [~~123Windows31/2kbot~~](https://kgithub.com/123Windows31/2kbot)
+        - [~~Emerald-AM9/Mica-App-Bot-~~](https://kgithub.com/Emerald-AM9/Mica-App-Bot-)
+            - [~~emerald-am9/mica-app-extension~~](https://gitee.com/emerald-am9/mica-app-extension/)
+    - [~~Abjust/2kbot-java~~](https://kgithub.com/Abjust/2kbot-java)
+    - [~~Abjust/2kbot-py~~](https://kgithub.com/Abjust/2kbot-py)
+    - [Abjust/2kshit](https://kgithub.com/Abjust/2kshit)
+- [ObsidianCatalina](https://kgithub.com/ObsidianCatalina/)
+    - [~~ObsidianCatalina/ObsidianBot~~](https://kgithub.com/ObsidianCatalina/ObsidianBot)
+    - [ObsidianCatalina/OpenMariya](https://kgithub.com/ObsidianCatalina/OpenMariya)
+        - [ltzXiaoYanMo/YanBot-OpenMariya_Edition](https://kgithub.com/ltzXiaoYanMo/YanBot-OpenMariya_Edition)
+- daizihan233
+    - daizihan233/KuoHuBit
+        - [~~ltzXiaoYanMo/YanBot-KHB_Edition_Older~~](https://kgithub.com/ltzXiaoYanMo/YanBot-KHB_Edition_Older)
+        - [ltzXiaoYanMo/YanBot_KHB_Edition](https://kgithub.com/ltzXiaoYanMo/YanBot_KHB_Edition)
+        - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
+    - [daizihan233/KuoHuShit](https://kgithub.com/daizihan233/KuoHuShit)
