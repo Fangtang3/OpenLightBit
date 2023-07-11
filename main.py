@@ -26,7 +26,6 @@ app = Ariadne(
     connection=config(
         botfunc.get_config('qq'),
         botfunc.get_config('verifyKey'),
-        logger.info (f'Trying to make you log in...')
         HttpClientConfig(host=botfunc.get_config('mirai_api_http')),
         WebsocketClientConfig(host=botfunc.get_config('mirai_api_http')),
     ),
