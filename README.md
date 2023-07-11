@@ -1,7 +1,7 @@
 # OpenLightBit 2
 
 一个很屑的QQBot | 基于 Mirai 与 Graia<br>
-本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源
+本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源<br>
 OpenLightBit 2.0已经停止支持，请使用OpenLightBit 2.2!
 
 # 其他的机器人
