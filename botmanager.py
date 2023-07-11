@@ -22,7 +22,16 @@ ban_user : [
     logger.error('./yamls/General.yaml 未创建，程序已自动创建，请填写该文件的内容')
     sys.exit(1)
 
-rand_sents = yaml.safe_load(open('./yamls/rand_sentence.yaml','r',encoding='UTF-8'))
+try:
+    rand_sents = yaml.safe_load(open('./yamls/rand_sentence.yaml','r',encoding='UTF-8'))
+except FileNotFoundError:
+    safe_file_write('yamls/rand_sentence.yaml', """rand_sentence : [
+                "这是机器人随机发送的内容",
+                "可以通过更改这里的内容来实现不同效果",
+                "祝你好运"
+                ]""")
+    logger.success('./yamls/rand_sentence.yaml 未创建，程序已自动创建。')
+    rand_sents = yaml.safe_load(open('./yamls/rand_sentence.yaml','r',encoding='UTF-8'))
 
 voices = yaml.safe_load(open('./yamls/Voices.yaml', 'r', encoding='UTF-8'))
 def bot_config(name: str):
