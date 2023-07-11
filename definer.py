@@ -13,7 +13,19 @@ rand_sentence_yaml = yaml.safe_load(open('./yamls/rand_sentence.yaml', 'r', enco
 
 #shit_yaml = yaml.safe_load(open('./yamls/shit.yaml', 'r', encoding='utf-8'))
 #settings_yaml = yaml.safe_load(open('./yamls/settings.yaml', 'r', encoding='UTF-8'))
-global_yaml = yaml.safe_load(open('./yamls/global.yaml','r',encoding='utf-8'))
+try:
+    global_yaml = yaml.safe_load(open('./yamls/global.yaml','r',encoding='utf-8'))
+except FileNotFoundError:
+    safe_file_write('./yamls/global.yaml', """bot_qq_id : 
+verifykey : ""
+su_id : [
+
+]
+bot_admin_id : """)
+    logger.error(
+        './yamls/global.yaml 未创建，程序已自动创建，请填写该文件的内容')
+    sys.exit(1)
+
 #take_menu_yaml = yaml.safe_load(open('./yamls/menu.yaml','r',encoding='utf-8'))
 #def url_config(name: str):
 #    try:
