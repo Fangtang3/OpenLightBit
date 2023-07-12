@@ -28,7 +28,8 @@ from graia.ariadne.message.element import At
 from graia.ariadne.message.element import Image
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
-from graia.ariadne.util.saya import listen, decorate
+from graia.ariadne.util.saya import listen
+from graia.ariadne.util.saya import decorate
 from graia.saya import Channel
 
 import botfunc
@@ -40,8 +41,9 @@ channel.description("666")
 channel.author("Emerald-AM9")
 
 sl1 = ["6", "9", "6的", "9（6翻了）", "⑥", "₆", "⑹", "⒍", "⁶", "Six", "Nine", "\u0039\ufe0f\u20e3",
-       "\u0036\ufe0f\u20e3", "♸"]  # 模糊匹配
-sl2 = []  # 精确匹配
+       "\u0036\ufe0f\u20e3", "♸","liu"]  # 模糊匹配
+sl2 = ["1+5", "2+4", "3+3", "4+2", "5+1", "2x3", "3x2","0b110","0B110"]  # 精确匹配
+# EIN DOS TROIS NE FEM LIU EXECUTION --world.execute(me);
 jieba.load_userdict('./jieba_words.txt')
 
 
