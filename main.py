@@ -96,6 +96,14 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `six` (
 cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` ( 
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `c` ( 
+`uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
+`count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT 'c 的次数',
+`ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"c"发送时间'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` ( 
+`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
 # Load sensitive word list
 logger.info(f'Loading sensitive words...')
@@ -106,7 +114,7 @@ cache_var.no_6 = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT uid FROM admin')
 if not cursor.fetchall():
     logger.error('未找到任何一个管理！')
-    admin_uid = int(input("请输入主人的QQ号："))
+    admin_uid = int(input("请输入你自己的QQ号作为管理："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
 
 conn.close()
