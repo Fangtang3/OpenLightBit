@@ -77,7 +77,7 @@ except FileNotFoundError:
     safe_file_write('cloud.json', """{
     "QCloud_Secret_id": "",  # QCloud用户ID，可留空
     "QCloud_Secret_key": "", # QCloud密钥ID，可留空
-    "MySQL_User": "" # 你的MySQL用户
+    "MySQL_User": "", # 你的MySQL用户
     "MySQL_Pwd": "", # 你的MySQL密码
     "MySQL_Port": 3306, # 你的MySQL端口，一般都是3306，如果是其他的需要修改
     "MySQL_Host": "localhost", # MySQL主机
