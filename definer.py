@@ -1,10 +1,22 @@
-# 芝士模仿Hanbot制作的集中化管理模块，大家也要多多支持Hantools
-# 芝士他的github:https://kgithub.com/daizihan233
+#    OpenLightBit-KuoHuBit
+#    Copyright (C) 2023  Emerald-AM9
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import json
 
 import yaml
-# 文本文件的读取可以在程序启动时完成，不必每次调用都打开，减少内存占用（虽然你大概感受不到）
-# 但有个缺点就是无法实现热更新（你还不至于懒到重启一次程序都不愿意罢？）
+
 #url_config_yaml = yaml.safe_load(open('./yamls/urls.yaml', 'r', encoding='UTF-8'))
 eji_yaml = yaml.safe_load(open('./yamls/eji.yaml', 'r', encoding='utf-8'))
 try:
