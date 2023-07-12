@@ -14,6 +14,6 @@ async def six(response: Response):
 
 
 if __name__ == '__main__':
-    tongtong_khapi_url = botfunc.get_config('khbit-api-ip')
-    tongtong_khapi_port = botfunc.get_config('khbit-api-port')
+    tongtong_khapi_url = botfunc.lbit_khapi('khbit-api-ip')
+    tongtong_khapi_port = botfunc.lbit_khapi('khbit-api-port')
     uvicorn.run("botapi:app", port={tongtong_khapi_port}, host='{tongtong_khapi_url}', reload=True)
