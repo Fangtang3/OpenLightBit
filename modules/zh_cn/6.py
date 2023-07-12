@@ -1,4 +1,17 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
+#    OpenLightBit-KuoHuBit
+#    Copyright (C) 2023  Emerald-AM9
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import random
@@ -10,7 +23,9 @@ import numpy
 from graia.amnesia.message import MessageChain
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.message.element import Plain, At, Image
+from graia.ariadne.message.element import Plain
+from graia.ariadne.message.element import At
+from graia.ariadne.message.element import Image
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen, decorate
@@ -22,7 +37,7 @@ import cache_var
 channel = Channel.current()
 channel.name("6榜")
 channel.description("666")
-channel.author("HanTools")
+channel.author("Emerald-AM9")
 
 sl1 = ["6", "9", "6的", "9（6翻了）", "⑥", "₆", "⑹", "⒍", "⁶", "Six", "Nine", "\u0039\ufe0f\u20e3",
        "\u0036\ufe0f\u20e3", "♸"]  # 模糊匹配
