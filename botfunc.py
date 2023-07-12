@@ -85,6 +85,13 @@ def get_config(name: str):
         logger.error(f'{name} 在配置文件中找不到')
         return None
 
+def khbit_api_custom_address(name: str):
+    try:
+        return emma_khapi_yaml[name]
+    except KeyError:
+        logger.error(f'{name} 在配置文件中找不到')
+        return None
+
 
 def get_cloud_config(name: str):
     try:
