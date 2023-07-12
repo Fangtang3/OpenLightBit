@@ -1,10 +1,19 @@
-# 此项目遵循 Mirai 使用的 AGPL-3.0 协议仍然保持开源并继续使用 AGPL-3.0
-# 如果您需要在此项目的基础上改动那么我强烈建议：
-#  - 保持开源
-#  - 使用 AGPL-3.0 协议
-#  - 注明使用了 Mirai 并其源代码来自此仓库
-import os
+#    OpenLightBit-KuoHuBit
+#    Copyright (C) 2023  Emerald-AM9
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import os
 import pymysql
 from creart import create
 from graia.ariadne.app import Ariadne
@@ -88,7 +97,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` (
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
-# 载入敏感词列表
+# Load sensitive word list
 logger.info(f'Loading sensitive words...')
 cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
