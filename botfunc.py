@@ -117,6 +117,12 @@ def get_dyn_config(name: str):
         logger.error(f'{name} 在配置文件中找不到')
         return None
 
+def lbit_khapi(name: str):
+    try:
+        return light_khapi_yaml[name]
+    except KeyError:
+        logger.error(f'{name} 在配置文件中找不到')
+        return None
 
 async def select_fetchone(sql, arg=None):
     conn = await aiomysql.connect(host=get_cloud_config('MySQL_Host'),
