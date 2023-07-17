@@ -1,5 +1,3 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://github.com/daizihan233/MiraiHanBot
-
 import jieba
 import opencc
 import yaml
@@ -50,28 +48,32 @@ jieba.load_userdict("./jieba_words.txt")
 @listen(GroupMessage)
 @decorate(MatchContent("开启本群敏感词检测"))
 async def start_word(app: Ariadne, group: Group, event: GroupMessage):
-    with open(dyn_config, 'r') as cf:
-        cfy = yaml.safe_load(cf)
-    cfy['word'].append(group.id)
-    cfy['word'] = list(set(cfy["word"]))
-    with open(dyn_config, 'w') as cf:
-        yaml.dump(cfy, cf)
-    await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
+        with open(dyn_config, 'r') as cf:
+            cfy = yaml.safe_load(cf)
+        cfy['word'].append(group.id)
+        cfy['word'] = list(set(cfy["word"]))
+        with open(dyn_config, 'w') as cf:
+            yaml.dump(cfy, cf)
+        await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
 
 
 @listen(GroupMessage)
 @decorate(MatchContent("关闭本群敏感词检测"))
 async def stop_word(app: Ariadne, group: Group, event: GroupMessage):
-    with open(dyn_config, 'r') as cf:
-        cfy = yaml.safe_load(cf)
-    try:
-        cfy['word'].remove(group.id)
-        cfy['word'] = list(set(cfy["word"]))
-        with open(dyn_config, 'w') as cf:
-            yaml.dump(cfy, cf)
-        await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
-    except Exception as err:
-        await app.send_message(group, MessageChain(At(event.sender.id), Plain(f" 报错辣！{err}")))
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
+        with open(dyn_config, 'r') as cf:
+            cfy = yaml.safe_load(cf)
+        try:
+            cfy['word'].remove(group.id)
+            cfy['word'] = list(set(cfy["word"]))
+            with open(dyn_config, 'w') as cf:
+                yaml.dump(cfy, cf)
+            await app.send_message(group, MessageChain(At(event.sender.id), Plain(" OK辣！")))
+        except Exception as err:
+            await app.send_message(group, MessageChain(At(event.sender.id), Plain(f" 报错辣！{err}")))
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
@@ -80,7 +82,7 @@ async def f(app: Ariadne, group: Group, event: GroupMessage):
         msg = opc.convert(  # 抗混淆：繁简字转换
             str(event.message_chain).strip(' []【】{}\\!！.。…?？啊哦额呃嗯嘿/')  # 抗混淆：去除语气词
         )
-        if str(event.message_chain) in cache_var.sensitive_words:  # 准确率：整句匹配
+        if str(event.message_chain) in cache_var.sensitive_words:  # 性能：整句匹配
             try:
                 await app.recall_message(event)
             except PermissionError:
@@ -109,10 +111,11 @@ async def f(app: Ariadne, group: Group, event: GroupMessage):
 
 @listen(GroupMessage)
 async def add(app: Ariadne, event: GroupMessage, message: MessageChain = DetectPrefix("加敏感词")):
-    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner]:
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
         if str(message) not in cache_var.sensitive_words:
             try:
-                await botfunc.run_sql('INSERT INTO wd(wd) VALUES (%s)', (message,))
+                await botfunc.run_sql('INSERT INTO wd(wd, count) VALUES (%s, 0)', (str(message),))
             except Exception as err:
                 await app.send_message(event.sender.group, f'寄！{err}')
             else:
@@ -127,7 +130,8 @@ async def add(app: Ariadne, event: GroupMessage, message: MessageChain = DetectP
 
 @listen(GroupMessage)
 async def rm(app: Ariadne, event: GroupMessage, message: MessageChain = DetectPrefix("删敏感词")):
-    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner]:
+    admin = await botfunc.get_all_admin()
+    if event.sender.permission in [MemberPerm.Administrator, MemberPerm.Owner] or event.sender.id in admin:
         try:
             await botfunc.run_sql('DELETE FROM wd WHERE wd=%s', (message,))
         except Exception as err:
