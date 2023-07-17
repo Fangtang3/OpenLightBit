@@ -13,8 +13,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import random
-
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.chain import MessageChain
@@ -24,17 +22,10 @@ from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 
-import definer
-
 channel = Channel.current()
 channel.name("版本查询")
 channel.description("查看机器人当前版本")
 channel.author("Emerald-AM9")
-
-r = definer.rand_sentence('rand_sentence')
-# 版本号随机句子的参数
-txt = "当前装载版本:OpenLightBit 2.3.0-release.b211(Xuanhua)(with Mariya Stable 1.2.7 compatibility)\n质量更新版本:2.3\n紧急更新补丁版本:0\n"
-
 
 @channel.use(
 
@@ -46,5 +37,5 @@ txt = "当前装载版本:OpenLightBit 2.3.0-release.b211(Xuanhua)(with Mariya S
 async def bot_version(app: Ariadne, group: Group):
     await app.send_message(
         group,
-        MessageChain([txt, "------------\n", Plain(random.choice(r))])
+        MessageChain(["OpenLightBit 2.4.0-alpha.b219", "------------\n", "更新一堆(?)"])
     )
