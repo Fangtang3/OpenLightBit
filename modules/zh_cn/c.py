@@ -38,8 +38,8 @@ channel.name("c榜")
 channel.description("谁闲的没事为这玩意也搞了个榜啊（恼）")
 channel.author("Emerald-AM9")
 
-sl1 = ["c", "草", "草的", "屮", "艹", "太草了", "tcl", "w", "www", "ccc", "愺", "亻草", "扌草", "草死", "草草草", "yruL", "笑う", "わらう"]  # 模糊匹配
-sl2 = ["cao"]  # 精确匹配
+sl1 = ["c", "草", "草的", "屮", "艹", "tcl", "操", "测", "愺", "亻草", "扌草", "草死", "草草草", "yruL", "笑う", "わらう"]  # 模糊匹配
+sl2 = ["cao","太草了"]  # 精确匹配
 jieba.load_userdict('./jieba_words.txt')
 
 
