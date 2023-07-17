@@ -28,7 +28,7 @@ from loguru import logger
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.3(Xuanhua) with Mariya Stable 1.2.7...")
+print ("Starting OpenLightBit 2.3.1(Xuanhua)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -118,14 +118,19 @@ if not cursor.fetchall():
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
 
 conn.close()
+
 with saya.module_context():
-    for root, dirs, files in os.walk("./modules", topdown=False):
+    for root, dirs, files in os.walk("./modules", topdown=True):
         for name in files:
             module = os.path.join(root, name).replace('\\', '.').replace('./', '').replace('/', '.').split('.')
             if '__pycache__' in module:
                 continue
             if module[1] == 'NO_USE':
                 continue
+            if module[1] == 'zh_hk':
+                logger.warning('从OpenLightBit 2.4开始不再内嵌繁体中文模块，请将模块放入modules文件夹根目录加载！')
+            if module[1] == 'zh_hk':
+                logger.warning('未来可能不支持将模块放入子文件夹进行加载，强烈建议将模块放入modules文件夹根目录加载！')
             module = '.'.join(module)[:-3]
             logger.info(f'装载模块{module}')
             saya.require(module)
