@@ -28,7 +28,7 @@ from loguru import logger
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.3.1(Xuanhua)...")
+print ("Starting OpenLightBit 2.3.2(Xuanhua)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -105,6 +105,8 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` (
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
+conn.commit()
+
 # Load sensitive word list
 logger.info(f'Loading sensitive words...')
 cursor.execute('SELECT wd, count FROM wd')
@@ -116,6 +118,11 @@ if not cursor.fetchall():
     logger.error('未找到任何一个管理！')
     admin_uid = int(input("请输入你自己的QQ号作为管理："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
+
+conn.commit()
+
+cursor.execute('SELECT gid FROM inm')
+cache_var.inm = [x[0] for x in cursor.fetchall()]
 
 conn.close()
 
