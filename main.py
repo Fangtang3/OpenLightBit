@@ -109,12 +109,12 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` (
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 cursor.execute("""CREATE TABLE IF NOT EXISTS `no_dian` ( 
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_0900_ai_ci" """)
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 cursor.execute("""CREATE TABLE IF NOT EXISTS `dian` ( 
 `uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
 `count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '发典 的次数',
 `ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"典"发送时间'
-) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_0900_ai_ci" """)
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
 conn.commit()
 
