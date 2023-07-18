@@ -105,10 +105,40 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` (
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
+conn.commit()
+
 # Load sensitive word list
-logger.info(f'Loading sensitive words...')
+logger.info(f'加载敏感词库')
+cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
+if not cache_var.sensitive_words:
+    logger.error('未找到敏感词库！即将从国内源拉取……（请保证能正常访问jsDelivr）')
+    input("> 是否继续？（回车 继续 Ctrl-C 退出）")
+    # 色情类
+    d = requests.get(
+        "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt").text.split(
+        ',\n')
+    # 政治类
+    d.extend(
+        requests.get(
+            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%94%BF%E6%B2%BB%E7%B1%BB.txt"
+        ).text.split(',\n')
+    )
+    # 违法类
+    d.extend(
+        requests.get(
+            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%B6%89%E6%9E%AA%E6%B6%89%E7%88%86%E8%BF%9D%E6%B3%95%E4%BF%A1%E6%81%AF%E5%85%B3%E9%94%AE%E8%AF%8D.txt"
+        ).text.split(',\n')
+    )
+    d.pop(-1)  # 上面的这些加载出来在列表末尾会多出一堆乱码，故删除，如果你需要魔改此部分请视情况自行删除
+    for w in track(d, description="Loading"):
+        cursor.execute("INSERT INTO wd VALUES (%s, 0)", (w,))
+        try:
+            conn.commit()
+        except pymysql.err.DataError:
+            conn.rollback()
 cursor.execute('SELECT wd, count FROM wd')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
+
 cursor.execute('SELECT gid FROM no_six')
 cache_var.no_6 = [x[0] for x in cursor.fetchall()]
 cursor.execute('SELECT uid FROM admin')
@@ -116,6 +146,11 @@ if not cursor.fetchall():
     logger.error('未找到任何一个管理！')
     admin_uid = int(input("请输入你自己的QQ号作为管理："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
+
+conn.commit()
+
+cursor.execute('SELECT gid FROM inm')
+cache_var.inm = [x[0] for x in cursor.fetchall()]
 
 conn.close()
 with saya.module_context():
