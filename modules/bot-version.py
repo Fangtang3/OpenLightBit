@@ -37,5 +37,5 @@ channel.author("Emerald-AM9")
 async def bot_version(app: Ariadne, group: Group):
     await app.send_message(
         group,
-        MessageChain(["OpenLightBit 2.4.0-alpha.b219", "------------\n", "更新一堆(?)"])
+        MessageChain(["OpenLightBit 2.4.0-preview", "------------\n", "更新一堆(?)"])
     )
