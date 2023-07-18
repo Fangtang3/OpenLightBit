@@ -19,23 +19,21 @@ from graia.ariadne.message.chain import MessageChain
 from graia.ariadne.message.element import Plain
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
+from graia.ariadne.util.saya import listen
+from graia.ariadne.util.saya import decorate
 from graia.saya import Channel
-from graia.saya.builtins.broadcast.schema import ListenerSchema
 
 channel = Channel.current()
 channel.name("版本查询")
 channel.description("查看机器人当前版本")
 channel.author("Emerald-AM9")
 
-@channel.use(
-
-    ListenerSchema(
-        listening_events=[GroupMessage],
-        decorators=[MatchContent("版本")]
-    )
-)
-async def bot_version(app: Ariadne, group: Group):
+@listen(GroupMessage)
+@decorate(MatchContent("版本"))
+async def ver(app: Ariadne, group: Group, event: GroupMessage):
+    olbname = botfunc.lbit_conf('bot-name')
+    olbcfver = botfunc.lbit_conf('bot-ver')
     await app.send_message(
         group,
-        MessageChain(["OpenLightBit 2.4.0-preview", "------------\n", "更新一堆(?)"])
+        MessageChain([At(event.sender.id), Plain(f"{olbname} {olbcfver}")]),
     )
