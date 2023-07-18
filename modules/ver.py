@@ -16,12 +16,15 @@
 from graia.ariadne.app import Ariadne
 from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message.chain import MessageChain
+from graia.ariadne.message.element import At
 from graia.ariadne.message.element import Plain
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen
 from graia.ariadne.util.saya import decorate
 from graia.saya import Channel
+
+import botfunc
 
 channel = Channel.current()
 channel.name("版本查询")
