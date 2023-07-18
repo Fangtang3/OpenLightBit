@@ -14,7 +14,9 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
+
 import pymysql
+import requests
 from creart import create
 from graia.ariadne.app import Ariadne
 from graia.ariadne.connection.config import (
@@ -24,6 +26,7 @@ from graia.ariadne.connection.config import (
 )
 from graia.saya import Saya
 from loguru import logger
+from rich.progress import track
 
 import botfunc
 import cache_var
