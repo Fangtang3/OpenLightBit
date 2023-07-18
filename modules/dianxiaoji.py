@@ -127,14 +127,12 @@ async def f_hide_mid(string, count=4, fix='*'):
 
 async def text_pretreatment(s):
     s = s.lower()
-    replace_words = [
-        (r"c+", "c"),
-    ]
-    stop_words = " ，,。.!！？?…^\n"
+    stop_words = " ，,。.!！？?…^()（）\n"
     for stop in stop_words:
         s = s.replace(stop, '')
-    for regex in replace_words:
-        s = re.compile(regex[0]).sub(regex[1], s)
+    replace_words = []
+    for regex in sl1 + sl2 + replace_words:
+        s = re.compile(f"({regex})+").sub(regex, s)
     return s
 
 
