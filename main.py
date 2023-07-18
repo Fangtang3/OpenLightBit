@@ -88,6 +88,8 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` (
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
+conn.commit()
+
 # 载入敏感词列表
 logger.info(f'Loading sensitive words...')
 cursor.execute('SELECT wd, count FROM wd')
@@ -99,6 +101,11 @@ if not cursor.fetchall():
     logger.error('未找到任何一个op！')
     admin_uid = int(input("请输入你（op）的QQ号："))
     cursor.execute("INSERT INTO admin VALUES (%s)", (admin_uid,))
+
+conn.commit()
+
+cursor.execute('SELECT gid FROM inm')
+cache_var.inm = [x[0] for x in cursor.fetchall()]
 
 conn.close()
 with saya.module_context():
