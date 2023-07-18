@@ -41,7 +41,7 @@ async def inm(app: Ariadne):
         try:
             await app.send_group_message(
                 target=group,
-                message=f"哼哼哼，{'啊' * random.randint(5, 20)}"
+                message=f"哼哼哼，{'啊' * random.randint(11, 45)}"
             )
         except ValueError:
             loguru.logger.warning(
@@ -61,7 +61,7 @@ async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
     await app.send_message(
         target=group,
         quote=source,
-        message='草'
+        message='已开启！'
     )
 
 
@@ -78,5 +78,5 @@ async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
     await app.send_message(
         target=group,
         quote=source,
-        message='艹'
+        message='已关闭！'
     )
