@@ -54,5 +54,3 @@ dependencies = [
 requires-python = ">=3.10,<4.0"
 license = { text = "AGPL-3.0" }
 readme = "README.md"
-
-[project.urls]
