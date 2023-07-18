@@ -28,7 +28,7 @@ from loguru import logger
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.3(Xuanhua) with Mariya Stable 1.2.7...")
+print ("Starting OpenLightBit 2.4(none)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -119,12 +119,14 @@ if not cursor.fetchall():
 
 conn.close()
 with saya.module_context():
-    for root, dirs, files in os.walk("./modules", topdown=False):
+    for root, dirs, files in os.walk("./modules", topdown=True):
         for name in files:
             module = os.path.join(root, name).replace('\\', '.').replace('./', '').replace('/', '.').split('.')
             if '__pycache__' in module:
                 continue
             if module[1] == 'NO_USE':
+                continue
+           if module_info.name.startswith("_"):
                 continue
             module = '.'.join(module)[:-3]
             logger.info(f'装载模块{module}')
