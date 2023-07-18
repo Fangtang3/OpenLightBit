@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "openmariya"
-version = "0.1.0"
-description = ""
+name = "openlightbit"
+version = "2.5.0"
+description = "A QQ bot"
 authors = ["None"]
 readme = "README.md"
 [tool.poetry.dependencies]
@@ -15,7 +15,6 @@ includes = []
 [[tool.pdm.source]]
 name = "douban"
 url = "https://pypi.doubanio.com/simple"
-verify_ssl = true
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
@@ -54,5 +53,3 @@ dependencies = [
 requires-python = ">=3.10,<4.0"
 license = { text = "AGPL-3.0" }
 readme = "README.md"
-
-[project.urls]
