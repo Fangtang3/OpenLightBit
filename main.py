@@ -19,11 +19,9 @@ import pymysql
 import requests
 from creart import create
 from graia.ariadne.app import Ariadne
-from graia.ariadne.connection.config import (
-    HttpClientConfig,
-    WebsocketClientConfig,
-    config,
-)
+from graia.ariadne.connection.config import HttpClientConfig,
+from graia.ariadne.connection.config import WebsocketClientConfig,
+from graia.ariadne.connection.config import config
 from graia.saya import Saya
 from loguru import logger
 from rich.progress import track
@@ -31,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.4.0(29-release-code-LiuRu)...")
+print ("Starting OpenLightBit 2.4.1(29sp1-sp-code-LiuRu)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -122,12 +120,13 @@ conn.commit()
 logger.info(f'加载敏感词库')
 cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 if not cache_var.sensitive_words:
-    logger.error('未找到敏感词库！即将从国内源拉取……（请保证能正常访问jsDelivr）')
-    input("> 是否继续？（回车 继续 Ctrl-C 退出）")
+    logger.warning('未找到敏感词库！即将从国内源拉取……（请保证能正常访问jsDelivr）')
     # 色情类
-    d = requests.get(
-        "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt").text.split(
-        ',\n')
+    d.extend
+        requests.get(
+            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt"
+        ).text.split(',\n')
+    )
     # 政治类
     d.extend(
         requests.get(
@@ -141,7 +140,7 @@ if not cache_var.sensitive_words:
         ).text.split(',\n')
     )
     d.pop(-1)  # 上面的这些加载出来在列表末尾会多出一堆乱码，故删除，如果你需要魔改此部分请视情况自行删除
-    for w in track(d, description="Loading"):
+    for w in track(d, description="加载中"):
         cursor.execute("INSERT INTO wd VALUES (%s, 0)", (w,))
         try:
             conn.commit()
@@ -172,17 +171,15 @@ with saya.module_context():
                 continue
             if module[1] == 'NO_USE':
                 continue
-           if module_info.name.startswith("_"):
+            if module_info.name.startswith("_"):
                 continue
             module = '.'.join(module)[:-3]
             logger.info(f'装载模块{module}')
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.info(f"模块{module}的信息如下：")
-    logger.info(f"名称: {channel.meta['name']}")
-    logger.info(f"作者: {' '.join(channel.meta['author'])}")
-    logger.info(f"简介: {channel.meta['description']}")
+    logger.info(f"已加载{channel.meta['name']} by {' '.join(channel.meta['author'])}（{module}）")
 
-logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
+logger.success('Timing reset')
+logger.success('现在可以使用你的bot了！')
 app.launch_blocking()
