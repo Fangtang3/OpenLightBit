@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.4.1(29sp1-sp-code-LiuRu)...")
+print ("Starting OpenLightBit 2.4.2(29sp2-30beta-code-LiuRu)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -180,6 +180,5 @@ with saya.module_context():
 for module, channel in saya.channels.items():
     logger.info(f"已加载{channel.meta['name']} by {' '.join(channel.meta['author'])}（{module}）")
 
-logger.success('Timing reset')
 logger.success('现在可以使用你的bot了！')
 app.launch_blocking()
