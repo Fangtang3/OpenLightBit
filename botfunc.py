@@ -116,7 +116,9 @@ except FileNotFoundError:
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
-bot-ver: "2.5" """)
+bot-ver: "2.5"
+current-unix-timestamp:
+owner-qq: 10001""")
     logger.warning('openlbit.yml 已被程序自动创建')
     light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 
