@@ -247,7 +247,7 @@ async def no_dian(app: Ariadne, group: Group, event: GroupMessage):
 @decorate(MatchContent("典孝急，张嘴"))
 async def yes_dian(app: Ariadne, group: Group, event: GroupMessage):
     admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
+    if event.sender.id not in admins and event.sender.permission not in [MemberPerm.Administrator, MemberPerm.Owner]:
         return
     if group.id in cache_var.no_dian:
         cache_var.no_dian.remove(group.id)
