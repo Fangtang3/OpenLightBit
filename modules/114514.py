@@ -47,6 +47,17 @@ async def inm(app: Ariadne):
             loguru.logger.warning(
                 f'{group} 不存在！请检查机器人是否被踢出，请尝试让机器人重新加群或手动删除数据库数据并重启机器人！')
 
+@channel.use(SchedulerSchema(timers.crontabify("19 19 * * * 00")))
+async def inm(app: Ariadne):
+    for group in cache_var.inm:
+        try:
+            await app.send_group_message(
+                target=group,
+                message=f"1145141919810"
+            )
+        except ValueError:
+            loguru.logger.warning(
+                f'{group} 不存在！请检查机器人是否被踢出，请尝试让机器人重新加群或手动删除数据库数据并重启机器人！')
 
 @listen(GroupMessage)
 @decorate(MatchContent("臭死力"))
