@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 31.0-Milestone-1(Milestone Update)...")
+print ("Starting OpenLightBit 31.0-Milestone-2(Milestone Update)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -132,19 +132,19 @@ if not cache_var.sensitive_words:
     # 色情类
     d.extend
         requests.get(
-            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt"
+            "https://ghproxy.com/https://github.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt"
         ).text.split(',\n')
     )
     # 政治类
     d.extend(
         requests.get(
-            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%94%BF%E6%B2%BB%E7%B1%BB.txt"
+            "https://ghproxy.com/https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%94%BF%E6%B2%BB%E7%B1%BB.txt"
         ).text.split(',\n')
     )
     # 违法类
     d.extend(
         requests.get(
-            "https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%B6%89%E6%9E%AA%E6%B6%89%E7%88%86%E8%BF%9D%E6%B3%95%E4%BF%A1%E6%81%AF%E5%85%B3%E9%94%AE%E8%AF%8D.txt"
+            "https://ghproxy.com/https://kgithub.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E6%B6%89%E6%9E%AA%E6%B6%89%E7%88%86%E8%BF%9D%E6%B3%95%E4%BF%A1%E6%81%AF%E5%85%B3%E9%94%AE%E8%AF%8D.txt"
         ).text.split(',\n')
     )
     d.pop(-1)  # 上面的这些加载出来在列表末尾会多出一堆乱码，故删除，如果你需要魔改此部分请视情况自行删除
