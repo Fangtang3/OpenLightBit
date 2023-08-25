@@ -19,7 +19,7 @@ from loguru import logger
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2.2(Tongtong) with Mariya Stable 1.2.7...")
+print ("Starting OpenLightBit 2.2.x(Tongtong) with Mariya Stable 1.2.7...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -30,11 +30,19 @@ app = Ariadne(
         WebsocketClientConfig(host=botfunc.get_config('mirai_api_http')),
     ),
 )
-conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
-                       user=botfunc.get_cloud_config('MySQL_User'),
-                       password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4',
-                       database=botfunc.get_cloud_config('MySQL_db'))
-cursor = conn.cursor()
+try:
+    conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
+                           user=botfunc.get_cloud_config('MySQL_User'),
+                           password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4',
+                           database=botfunc.get_cloud_config('MySQL_db'))
+    cursor = conn.cursor()
+except pymysql.err.InternalError:
+    conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
+                           user=botfunc.get_cloud_config('MySQL_User'),
+                           password=botfunc.get_cloud_config('MySQL_Pwd'), charset='utf8mb4')
+    cursor = conn.cursor()
+    cursor.execute("""create database if not exists %s""", (botfunc.get_cloud_config('MySQL_db'),))
+
 cursor.execute("""create table if not exists admin
 (
     uid bigint unsigned default '0' not null
@@ -87,6 +95,22 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `six` (
 cursor.execute("""CREATE TABLE IF NOT EXISTS `no_six` ( 
 `gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `c` ( 
+`uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
+`count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT 'c 的次数',
+`ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"c"发送时间'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `no_c` ( 
+`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `no_dian` ( 
+`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `dian` ( 
+`uid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT 'QQ号' ,
+`count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '发典 的次数',
+`ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"典"发送时间'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
 
 conn.commit()
 
@@ -116,8 +140,10 @@ with saya.module_context():
                 continue
             if module[1] == 'NO_USE':
                 continue
+            if module[1] == 'zh_hk':
+                logger.warning('{module}：从OpenLightBit 2.4开始不再内嵌繁体中文模块，请将模块放入modules文件夹根目录加载！')
             module = '.'.join(module)[:-3]
-            logger.info(f'Loading module {module}')
+            logger.info(f'正在加载模块{module}')
             saya.require(module)
 
 for module, channel in saya.channels.items():
