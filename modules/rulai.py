@@ -22,7 +22,7 @@ from graia.saya import Channel
 channel = Channel.current()
 channel.name("如来")
 channel.description("在有人找机器人私聊的时候，如来")
-channel.author("HanTools")
+channel.author("HanTools,Emerald-AM9")
 
 rutext = """这是机器人随机发送的内容
 可以通过更改这里的内容来实现不同效果
