@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 30.1-LTS(Yan)...")
+print ("Starting OpenLightBit 30.1-LTS(ZhuYanYan)...")
 
 saya = create(Saya)
 app = Ariadne(
