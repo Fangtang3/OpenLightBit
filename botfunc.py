@@ -24,7 +24,6 @@ import requests_cache
 import yaml
 from loguru import logger
 
-print ("Initializing data...")
 def safe_file_read(filename: str, encode: str = "UTF-8", mode: str = "r") -> str or bytes:
     if mode == 'r':
         with open(filename, mode, encoding=encode) as file:
@@ -67,7 +66,11 @@ setu_api2_probability: 5 # 表示【涩图 API 2】的被调用的概率为 1/n
 NewFriendRequestEvent: true  # 是否自动通过好友添加：true -> 自动通过 | false -> 自动拒绝
 BotInvitedJoinGroupRequestEvent: true  # 是否自动通过加群邀请：同上
 mirai_api_http: "http://localhost:8088"  # 连接到 MAH 的地址
-count_ban: 4  # 木鱼调用频率限制""")
+count_ban: 4  # 木鱼调用频率限制
+# 注意：腾讯云内容安全 API 收费为 0.0025/条
+text_review: false  # 是否使用腾讯云内容安全 API 对文本内容进行审核：true -> 是 | false -> 否，使用本地敏感词库
+# 请参考此文章就近设置地域：https://cloud.tencent.com/document/api/1124/51864#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8
+Region: ap-hongkong  # 使用香港地区 API""")
     logger.error(
         'config.yaml 未创建，程序已自动创建，请填写该文件的内容')
     sys.exit(1)
@@ -106,7 +109,9 @@ except FileNotFoundError:
 word:
 - 620563816
 - 469903354
-- 643981003""")
+- 643981003
+img:
+- null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
     dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 try:
@@ -139,7 +144,7 @@ def get_cloud_config(name: str):
         return cloud_config_json[name]
     except KeyError:
         logger.error(f'{name} 在配置文件中找不到')
-        return None
+        return ""
 
 
 def get_dyn_config(name: str):
@@ -147,7 +152,7 @@ def get_dyn_config(name: str):
         return dyn_yaml[name]
     except KeyError:
         logger.error(f'{name} 在配置文件中找不到')
-        return None
+        return []
 
 def lbit_conf(name: str):
     try:
