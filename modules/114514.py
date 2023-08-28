@@ -21,18 +21,19 @@ from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.message import Source
 from graia.ariadne.message.parser.base import MatchContent
 from graia.ariadne.model import Group
-from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
+from graia.saya.builtins.broadcast import ListenerSchema
 from graia.scheduler import timers
 from graia.scheduler.saya import SchedulerSchema
 
 import botfunc
 import cache_var
+import depen
 
 channel = Channel.current()
-channel.name("114514")
-channel.description("臭死力")
-channel.author("Emerald-AM9")
+channel.name("inm")
+channel.description("哼哼哼，啊啊啊啊啊")
+channel.author("Hantools,Emerald-AM9")
 
 
 @channel.use(SchedulerSchema(timers.crontabify("45 11 * * * 14")))
@@ -41,30 +42,23 @@ async def inm(app: Ariadne):
         try:
             await app.send_group_message(
                 target=group,
-                message=f"哼哼哼，{'啊' * random.randint(11, 45)}"
+                message=f"哼哼哼，{'啊' * random.randint(5, 20)}"
             )
         except ValueError:
             loguru.logger.warning(
                 f'{group} 不存在！请检查机器人是否被踢出，请尝试让机器人重新加群或手动删除数据库数据并重启机器人！')
 
-@channel.use(SchedulerSchema(timers.crontabify("19 19 * * * 00")))
-async def inm(app: Ariadne):
-    for group in cache_var.inm:
-        try:
-            await app.send_group_message(
-                target=group,
-                message=f"1145141919810"
-            )
-        except ValueError:
-            loguru.logger.warning(
-                f'{group} 不存在！请检查机器人是否被踢出，请尝试让机器人重新加群或手动删除数据库数据并重启机器人！')
 
-@listen(GroupMessage)
-@decorate(MatchContent("臭死力"))
-async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
-    admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
-        return
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("臭死力"),
+            depen.check_authority_op()
+        ]
+    )
+)
+async def homo(app: Ariadne, group: Group, source: Source):
     if group.id in cache_var.inm:
         return
     cache_var.inm.append(group.id)
@@ -76,8 +70,15 @@ async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
     )
 
 
-@listen(GroupMessage)
-@decorate(MatchContent("香死力"))
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            MatchContent("香死力"),
+            depen.check_authority_op()
+        ]
+    )
+)
 async def homo(app: Ariadne, group: Group, source: Source, event: GroupMessage):
     admins = await botfunc.get_all_admin()
     if event.sender.id not in admins:
