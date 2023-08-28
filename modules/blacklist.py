@@ -20,24 +20,30 @@ from graia.ariadne.event.message import GroupMessage
 from graia.ariadne.event.mirai import MemberJoinEvent
 from graia.ariadne.message.element import At
 from graia.ariadne.message.parser.base import DetectPrefix
-from graia.ariadne.model import Group, Member
-from graia.ariadne.util.saya import listen
 from graia.saya import Channel
+from graia.saya.builtins.broadcast import ListenerSchema
 from loguru import logger
 
 import botfunc
+import depen
 
 channel = Channel.current()
 channel.name("黑名单")
-channel.description("操你吗的")
-channel.author("Emerald-AM9")
+channel.description("屌你老母")
+channel.author("HanTools")
 
 
-@listen(GroupMessage)
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            DetectPrefix("拉黑"),
+            depen.check_authority_op(),
+            depen.check_authority_not_black()
+        ]
+    )
+)
 async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = DetectPrefix("拉黑")):
-    admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
-        return
     msg = "--- 执行结果 ---\n"
     flag = True
     for i in message[At]:
@@ -47,7 +53,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
             await botfunc.run_sql('INSERT INTO blacklist(uid, op) VALUES (%s, %s)',
                                   (i.target, event.sender.id))
         except Exception as err:
-            logger.warning(f'{i} Blacklist failed during a database error：{err}')
+            logger.warning(f'{i} 未能成功加入数据库：{err}')
             msg += f'    数据库：【错误：{err}】\n'
         else:
             msg += '    数据库：成功\n'
@@ -57,7 +63,7 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
                 event.sender.id
             )
         except PermissionError:
-            logger.warning(f'{i} Kick failed during a PermissionError')
+            logger.warning(f'{i} 未能成功踢出：权限错误')
             msg += '    踢出：【错误：无权踢出】'
         else:
             msg += '    踢出：成功'
@@ -86,11 +92,17 @@ async def nmsl(app: Ariadne, event: GroupMessage, message: MessageChain = Detect
         await app.send_message(event.sender.group, msg)
 
 
-@listen(MemberJoinEvent)
+@channel.use(
+    ListenerSchema(
+        listening_events=[MemberJoinEvent],
+        decorators=[
+            depen.check_authority_black()
+        ]
+    )
+)
 async def kicksb(app: Ariadne, event: MemberJoinEvent):
-    sbs = await botfunc.get_all_sb()
     admins = await botfunc.get_all_admin()
-    if event.member.id in sbs and event.inviter.id in admins:
+    if event.inviter.id not in admins:
         t = await botfunc.select_fetchone("SELECT uid, op FROM blacklist WHERE uid = %s", (event.member.id,))
         try:
             await app.kick_member(event.member.group)
@@ -101,28 +113,20 @@ async def kicksb(app: Ariadne, event: MemberJoinEvent):
             await app.send_message(event.member.group, f'{event.member.id} 被踢出去辣！（喜）')
 
 
-@listen(GroupMessage)
+@channel.use(
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        decorators=[
+            DetectPrefix("删黑"),
+            depen.check_authority_op(),
+            depen.check_authority_not_black()
+        ]
+    )
+)
 async def nmms(app: Ariadne, event: GroupMessage, message: MessageChain = DetectPrefix("删黑")):
-    admins = await botfunc.get_all_admin()
-    if event.sender.id not in admins:
-        return
     try:
         await botfunc.run_sql('DELETE FROM blacklist WHERE uid = %s',
                               (int(str(message)),))
         await app.send_message(event.sender.group, "好乐！")
     except Exception as err:
         await app.send_message(event.sender.group, f"Umm，{err}")
-
-
-@listen(MemberJoinEvent)
-async def kick(app: Ariadne, group: Group, member: Member, event: MemberJoinEvent):
-    black = await botfunc.get_all_sb()
-    if event.inviter is None and (member.id in black):
-        await app.kick_member(
-            group=group,
-            member=member
-        )
-        await app.send_message(
-            target=group,
-            message=f'{member.id} 已在黑名单内'
-        )
