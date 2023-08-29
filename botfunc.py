@@ -124,10 +124,11 @@ bot-name: "OpenLightBit"
 bot-ver: "2.5"
 current-unix-timestamp:
 owner-qq: 1000
-rand_sentence : [
-                "这是机器人随机发送的内容",
-                "可以通过更改这里的内容来实现不同效果"
-                ]""")
+os-ver: "debian-buster"
+rulai: [
+       "第一条",
+       "第二条"
+       ]""")
     logger.warning('openlbit.yml 已被程序自动创建')
     light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 
