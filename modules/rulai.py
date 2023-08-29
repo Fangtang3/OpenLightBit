@@ -24,7 +24,7 @@ channel.name("如来")
 channel.description("在有人找机器人私聊的时候，如来")
 channel.author("HanTools")
 
-rutext = botfunc.lbit_conf('rand_sentence').split('\n')
+rutext = botfunc.lbit_conf('rulai').split('\n')
 
 index = 0
 
