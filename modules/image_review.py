@@ -23,8 +23,10 @@ import depen
 
 channel = Channel.current()
 channel.name("图片审核")
-channel.description("调用腾讯云API检测图片并撤回")
+channel.description("你疑似有点太极端了")
 channel.author("HanTools")
+dyn_config = 'dynamic_config.yaml'
+
 
 async def using_tencent_cloud(content: str, user_id: str) -> dict:
     if botfunc.r.hexists("imgsafe", hashlib.sha384(content.encode()).hexdigest()):
@@ -37,6 +39,7 @@ async def using_tencent_cloud(content: str, user_id: str) -> dict:
         client = ims_client.ImsClient(cred, "ap-guangzhou")
         req = models.ImageModerationRequest()
         params = {
+            "BizType": botfunc.get_cloud_config("img_biztype"),
             "FileContent": content,  # base64
             "User": {
                 "UserId": user_id,
@@ -51,15 +54,15 @@ async def using_tencent_cloud(content: str, user_id: str) -> dict:
                 {
                     "Suggestion": resp.Suggestion,
                     "SubLabel": resp.SubLabel,
-                    "DataId": resp.DataId
+                    "DataId": resp.RequestId
                 }
             )
         )
-        logger.debug(f"新图片入库！{resp.Suggestion} | {resp.SubLabel} | {resp.DataId}")
+        logger.debug(f"新图片入库！{resp.Suggestion} | {resp.SubLabel} | {resp.RequestId}")
         return {
             "Suggestion": resp.Suggestion,
             "SubLabel": resp.SubLabel,
-            "DataId": resp.DataId
+            "DataId": resp.RequestId
         }
     except TencentCloudSDKException as err:
         logger.error(err)
@@ -114,7 +117,10 @@ async def stop_review(app: Ariadne, group: Group, event: GroupMessage):
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
-        decorators=[depen.match_image()]
+        decorators=[
+            depen.match_image(),
+            depen.check_authority_member()
+        ]
     )
 )
 async def image_review(app: Ariadne, message: MessageChain, event: GroupMessage):
