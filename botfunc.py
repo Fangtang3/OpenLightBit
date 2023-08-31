@@ -15,6 +15,7 @@
 
 import asyncio
 import json
+import pathlib
 import sys
 
 import aiomysql
@@ -53,9 +54,10 @@ def safe_file_write(filename: str, s, mode: str = "w", encode: str = "UTF-8"):
 
 
 loop = asyncio.get_event_loop()
-try:
-    config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
-except FileNotFoundError:
+#try:
+#    config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
+#except FileNotFoundError:
+if not pathlib.Path("./config.yaml").exists():
     safe_file_write('config.yaml', """qq: 10001  # 运行时登录的 QQ 号
 verifyKey: "@(HANKuohu2)33###@MiraiApiHTTP"  # MAH 的 verifyKey
 recall: 30  # 涩图撤回等待时长（单位：秒）
@@ -74,9 +76,10 @@ Region: ap-hongkong  # 使用香港地区 API""")
     logger.error(
         'config.yaml 未创建，程序已自动创建，请填写该文件的内容')
     sys.exit(1)
-try:
-    cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
-except FileNotFoundError:
+#try:
+#    cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+#except FileNotFoundError:
+if not pathlib.Path("./cloud.json").exists():
     safe_file_write('cloud.json', """{
     "QCloud_Secret_id": "",  # QCloud用户ID，可留空
     "QCloud_Secret_key": "", # QCloud密钥ID，可留空
@@ -94,9 +97,10 @@ except FileNotFoundError:
     logger.error(
         'cloud.json 未创建，程序已自动创建，请参考注释和 https://github.com/daizihan233/KuoHuBit/issues/17 填写该文件的内容')
     sys.exit(1)
-try:
-    dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
-except FileNotFoundError:
+#try:
+#    dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
+#except FileNotFoundError:
+if not pathlib.Path("./dynamic_config.yaml").exists():
     safe_file_write('dynamic_config.yaml', """mute:
 - 767949862
 - 556482025
@@ -113,10 +117,10 @@ word:
 img:
 - null""")
     logger.warning('dynamic_config.yaml 已被程序自动创建')
-    dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
-try:
-    light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
-except FileNotFoundError:
+#try:
+#    light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
+#except FileNotFoundError:
+if not pathlib.Path("./openlbit.yml").exists():
     safe_file_write('openlbit.yml', """# OpenLightBit配置文件
 api-ip: "0.0.0.0"
 api-port: 8989
@@ -130,7 +134,11 @@ rulai: [
        "第二条"
        ]""")
     logger.warning('openlbit.yml 已被程序自动创建')
-    light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
+
+config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
+cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
+light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 
 def get_config(name: str):
     try:
