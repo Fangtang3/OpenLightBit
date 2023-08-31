@@ -13,20 +13,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import jieba
-import opencc
-import yaml
-from graia.ariadne.app import Ariadne
-from graia.ariadne.event.message import GroupMessage
-from graia.ariadne.message.chain import MessageChain
-from graia.ariadne.message.element import At, Plain
-from graia.ariadne.message.parser.base import MatchContent, DetectPrefix
-from graia.ariadne.model import Group, MemberPerm
-from graia.ariadne.util.saya import listen, decorate
-from graia.saya import Channel
-from graia.saya.builtins.broadcast.schema import ListenerSchema
-from loguru import logger
-
 import base64
 import hashlib
 import json
@@ -81,7 +67,7 @@ Edu Trust认证 2000
 jieba.load_userdict("./jieba_words.txt")
 
 
-async def using_tencent_cloud(content: str, user_id: str):
+async def using_tencent_cloud(content: str, user_id: str) -> str:
     if botfunc.r.hexists("sw", hashlib.sha384(content.encode()).hexdigest()):
         return botfunc.r.hget("sw", hashlib.sha384(content.encode()).hexdigest())
     try:
@@ -92,6 +78,7 @@ async def using_tencent_cloud(content: str, user_id: str):
         client = tms_client.TmsClient(cred, "ap-guangzhou")
         req = models.TextModerationRequest()
         params = {
+            "BizType": botfunc.get_cloud_config("text_biztype"),
             "Content": base64.b64encode(content.encode()).decode(),
             "User": {
                 "UserId": user_id,
@@ -113,7 +100,7 @@ async def using_tencent_cloud(content: str, user_id: str):
         listening_events=[GroupMessage],
         decorators=[
             MatchContent("开启本群敏感词检测"),
-            depen.check_authority_op()
+            depen.check_authority_bot_op()
         ]
     )
 )
@@ -154,16 +141,23 @@ async def stop_word(app: Ariadne, group: Group, event: GroupMessage):
 @channel.use(
     ListenerSchema(
         listening_events=[GroupMessage],
-        decorators=[depen.match_text()]
+        decorators=[
+            depen.match_text(),
+            depen.check_authority_member()
+        ]
     )
 )
 async def f(app: Ariadne, group: Group, event: GroupMessage):
     if group.id in botfunc.get_dyn_config('word'):
         if not botfunc.get_config("text_review"):
             msg = opc.convert(  # 抗混淆：繁简字转换
-                str(event.message_chain).strip(' []【】{}\\!！.。…?？啊哦额呃嗯嘿/')  # 抗混淆：去除语气词
+                (''.join(list(map(lambda x: x.text, event.message_chain[Plain])))).strip(
+                    ' []【】{}\\!！.。…?？啊哦额呃嗯嘿/')
+                # 抗混淆：去除语气词
             )
-            if str(event.message_chain) in cache_var.sensitive_words:  # 性能：整句匹配
+            if (
+                    ''.join(list(
+                        map(lambda x: x.text, event.message_chain[Plain])))) in cache_var.sensitive_words:  # 性能：整句匹配
                 try:
                     await app.recall_message(event)
                 except PermissionError:
@@ -179,6 +173,23 @@ async def f(app: Ariadne, group: Group, event: GroupMessage):
             logger.debug(wd)
             for w in wd:
                 if w in cache_var.sensitive_words:
+                    if botfunc.get_config("violation_text_review"):
+                        result = await using_tencent_cloud(
+                            (''.join(list(map(lambda x: x.text, event.message_chain[Plain])))),
+                            str(event.sender.id))
+                        logger.debug(f"本地敏感词库 -> Block | 腾讯云文本内容安全 -> {result}")
+                        if result == "Block":
+                            try:
+                                await app.recall_message(event)
+                            except PermissionError:
+                                logger.error('无权操作！')
+                            else:
+                                await app.send_message(event.sender.group, MessageChain(
+                                    [At(event.sender.id),
+                                     "你的消息涉及敏感内容，为保护群聊消息已被撤回\n【数据来源：本地敏感词库 & 腾讯云文本内容安全】"]))
+                            break
+                        else:
+                            continue
                     try:
                         await app.recall_message(event)
                     except PermissionError:
@@ -190,7 +201,8 @@ async def f(app: Ariadne, group: Group, event: GroupMessage):
                     await botfunc.run_sql('UPDATE wd SET count=count+1 WHERE wd=%s', (w,))
                     break
         else:
-            result = await using_tencent_cloud(str(event.message_chain), str(event.sender.id))
+            result = await using_tencent_cloud((''.join(list(map(lambda x: x.text, event.message_chain[Plain])))),
+                                               str(event.sender.id))
             if result == "Block":
                 try:
                     await app.recall_message(event)
