@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit unstable(code)...")
+print ("Starting OpenLightBit 31.0-RC1(Milestone Update)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -148,7 +148,7 @@ if not cache_var.sensitive_words:
         ).text.split(',\n')
     )
     d.pop(-1)  # 上面的这些加载出来在列表末尾会多出一堆乱码，故删除，如果你需要魔改此部分请视情况自行删除
-    for w in track(d, description="加载中"):
+    for w in track(d, description="Loading..."):
         cursor.execute("INSERT INTO wd VALUES (%s, 0)", (w,))
         try:
             conn.commit()
