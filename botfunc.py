@@ -120,6 +120,7 @@ img:
 #try:
 #    light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 #except FileNotFoundError:
+
 if not pathlib.Path("./openlbit.yml").exists():
     safe_file_write('openlbit.yml', """# OpenLightBit配置文件
 api-ip: "0.0.0.0"
@@ -135,22 +136,19 @@ rulai: [
        ]""")
     logger.warning('openlbit.yml 已被程序自动创建')
 
-config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
-cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
-dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
-light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
-<<<<<<< main
-try:
-   cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
-except FileNotFoundError:
-   safe_file_write('openai.json', """
+if not pathlib.Path("./openlbit.yml").exists():
+    safe_file_write('openai.json', """
 {
     url:
     key:
 }
 """)
-   logger.warning('OpenAI.json 已经被程序自动创建，可在 https://openai.ymbot.top 中配置此处的配置')
-<<<<<<< main
+    logger.warning('OpenAI.json 已经被程序自动创建，可在 https://openai.ymbot.top 中配置此处的配置')
+
+config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
+cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
+light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 
 def get_config(name: str):
     try:
