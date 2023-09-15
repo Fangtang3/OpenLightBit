@@ -136,7 +136,7 @@ rulai: [
        ]""")
     logger.warning('openlbit.yml 已被程序自动创建')
 
-if not pathlib.Path("./openlbit.yml").exists():
+if not pathlib.Path("./openai.json").exists():
     safe_file_write('openai.json', """
 {
     url:
