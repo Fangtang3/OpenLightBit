@@ -139,6 +139,18 @@ config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
 cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
+<<<<<<< main
+try:
+   cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+except FileNotFoundError:
+   safe_file_write('openai.json', """
+{
+    url:
+    key:
+}
+""")
+   logger.warning('OpenAI.json 已经被程序自动创建，可在 https://openai.ymbot.top 中配置此处的配置')
+<<<<<<< main
 
 def get_config(name: str):
     try:

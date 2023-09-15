@@ -61,7 +61,3 @@ async def chatgpt(app: Ariadne, group: Group, event: GroupMessage):
         for i in range(len(chat)):
             if listen(MessageChain("YB再见")):
                     break
-        )
-        )
-    )
-)
