@@ -60,11 +60,11 @@ loop = asyncio.get_event_loop()
 if not pathlib.Path("./config.yaml").exists():
     safe_file_write('config.yaml', """qq: 10001  # 运行时登录的 QQ 号
 verifyKey: "@(HANKuohu2)33###@MiraiApiHTTP"  # MAH 的 verifyKey
-recall: 30  # 涩图撤回等待时长（单位：秒）
-# 如果你没有那么多涩图API可以填一样的URL
-setu_api: "https://api.jiecs.top/lolicon?r18=2"  # 涩图 API
-setu_api2: "https://www.acy.moe/api/r18"  # 涩图 API 2
-setu_api2_probability: 5 # 表示【涩图 API 2】的被调用的概率为 1/n
+recall: 30  # 图撤回等待时长（单位：秒）
+# 如果你没有那么多图API可以填一样的URL
+setu_api: "https://api.jiecs.top/lolicon?r18=2"  # 图 API
+setu_api2: "https://www.acy.moe/api/r18"  # 图 API 2
+setu_api2_probability: 5 # 表示【图 API 2】的被调用的概率为 1/n
 NewFriendRequestEvent: true  # 是否自动通过好友添加：true -> 自动通过 | false -> 自动拒绝
 BotInvitedJoinGroupRequestEvent: true  # 是否自动通过加群邀请：同上
 mirai_api_http: "http://localhost:8088"  # 连接到 MAH 的地址
@@ -139,16 +139,6 @@ config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
 cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
-try:
-    oaconfig = json.load(open('oaconfig.json', 'r', encoding='UTF-8'))
-except FileNotFoundError:
-    safe_file_write('oaconfig.json', """{
-              url:
-                key:
-                }""")
-    logger.warning(
-                                'oaconfig.json 已经被程序自动创建')
-                    )
 
 def get_config(name: str):
     try:
