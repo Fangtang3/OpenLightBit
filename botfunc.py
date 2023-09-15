@@ -140,14 +140,14 @@ cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
 dyn_yaml = yaml.safe_load(open('dynamic_config.yaml', 'r', encoding='UTF-8'))
 light_khapi_yaml = yaml.safe_load(open('openlbit.yml', 'r', encoding='UTF-8'))
 try:
-    cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
+    oaconfig = json.load(open('oaconfig.json', 'r', encoding='UTF-8'))
 except FileNotFoundError:
-    safe_file_write('openai.json', """{
+    safe_file_write('oaconfig.json', """{
               url:
                 key:
                 }""")
     logger.warning(
-                                'OpenAI.json 已经被程序自动创建')
+                                'oaconfig.json 已经被程序自动创建')
                     )
 
 def get_config(name: str):
