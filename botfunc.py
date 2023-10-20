@@ -24,6 +24,7 @@ import redis
 import requests_cache
 import yaml
 from loguru import logger
+from paddlenlp import Taskflow
 
 def safe_file_read(filename: str, encode: str = "UTF-8", mode: str = "r") -> str or bytes:
     if mode == 'r':
@@ -59,6 +60,7 @@ loop = asyncio.get_event_loop()
 #except FileNotFoundError:
 if not pathlib.Path("./config.yaml").exists():
     safe_file_write('config.yaml', """qq: 10001  # 运行时登录的 QQ 号
+su: 10001 # 机器人主人的 QQ 号
 verifyKey: "@(HANKuohu2)33###@MiraiApiHTTP"  # MAH 的 verifyKey
 recall: 30  # 图撤回等待时长（单位：秒）
 # 如果你没有那么多图API可以填一样的URL
@@ -126,9 +128,9 @@ if not pathlib.Path("./openlbit.yml").exists():
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
-bot-ver: "2.5"
+bot-ver: "3x"
 current-unix-timestamp:
-owner-qq: 1000
+owner-qq: 10001 # 预留
 os-ver: "debian-buster"
 rulai: [
        "第一条",
@@ -228,7 +230,7 @@ async def select_fetchall(sql, arg=None):
     return result
 
 
-async def run_sql(sql, arg):
+async def run_sql(sql, arg=None):
     conn = await aiomysql.connect(host=get_cloud_config('MySQL_Host'),
                                   port=get_cloud_config('MySQL_Port'),
                                   user=get_cloud_config('MySQL_User'),
@@ -236,7 +238,10 @@ async def run_sql(sql, arg):
                                   db=get_cloud_config('MySQL_db'), loop=loop)
 
     cur = await conn.cursor()
-    await cur.execute(sql, arg)
+    if arg:
+        await cur.execute(sql, arg)
+    else:
+        await cur.execute(sql)
     await cur.execute("commit")
     await cur.close()
     conn.close()
@@ -258,6 +263,9 @@ async def get_all_sb() -> list:
         t.append(i[0])
     return t
 
+async def get_su() -> int:
+    tmp = get_config('su')
+    return tmp
 
 if get_cloud_config("Redis_Pwd") is not None:
     backend = requests_cache.RedisCache(
@@ -283,3 +291,4 @@ session = requests_cache.CachedSession("global_session", backend=backend, expire
 
 p = redis.ConnectionPool(host=get_cloud_config('Redis_Host'), port=get_cloud_config('Redis_port'))
 r = redis.Redis(connection_pool=p, decode_responses=True)
+seg_accurate = Taskflow("word_segmentation", mode="accurate", user_dict="./jieba_words.txt")  # 精确中文分词
