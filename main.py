@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 31.0-RC1(Milestone Update)...")
+print ("Starting OpenLightBit 2023.10(Milestone Update)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -121,6 +121,13 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `dian` (
 `count` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '发典 的次数',
 `ti` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后一次"典"发送时间'
 ) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_unicode_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `top5_keywords` ( 
+`words` tinytext NOT NULL COMMENT '词语',
+`count` int UNSIGNED NOT NULL COMMENT '次数'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
+cursor.execute("""CREATE TABLE IF NOT EXISTS `inm` ( 
+`gid` bigint UNSIGNED NOT NULL PRIMARY KEY COMMENT '群号'
+) ENGINE = innodb DEFAULT CHARACTER SET = "utf8mb4" COLLATE = "utf8mb4_general_ci" """)
 
 conn.commit()
 
