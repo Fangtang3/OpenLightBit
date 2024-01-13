@@ -1,5 +1,5 @@
 #    OpenLightBit-KuoHuBit
-#    Copyright (C) 2023  Emerald-AM9
+#    Copyright (C) 2024  Emerald-AM9
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
