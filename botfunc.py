@@ -130,7 +130,6 @@ api-port: 8989
 bot-name: "OpenLightBit"
 bot-ver: "3x"
 current-unix-timestamp:
-owner-qq: 10001 # 预留
 os-ver: "debian-buster"
 rulai: [
        "第一条",
