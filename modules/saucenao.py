@@ -9,14 +9,14 @@ from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen, decorate
 from graia.saya import Channel
 from loguru import logger
+from graia.saya.channel import ChannelMeta
 
 import botfunc
 
-channel = Channel.current()
-channel.name("snao搜图")
-channel.description("工口发生！")
-channel.author("HanTools")
-
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "snao搜图"
+channel.meta['description'] = "工口发生！"
+channel.meta['author'] = "KuoHu"
 
 @listen(GroupMessage)
 @decorate(DetectPrefix("搜图"))

@@ -162,7 +162,7 @@ cache_var.inm = [x[0] for x in cursor.fetchall()]
 
 conn.close()
 with saya.module_context():
-    for root, dirs, files in os.walk("./modules", topdown=True):
+    for root, dirs, files in os.walk("./modules", topdown=False):
         for name in files:
             module = os.path.join(root, name).replace('\\', '.').replace('./', '').replace('/', '.').split('.')
             if '__pycache__' in module:
@@ -170,11 +170,14 @@ with saya.module_context():
             if module[1] == 'NO_USE':
                 continue
             module = '.'.join(module)[:-3]
-            logger.info(f'装载模块{module}')
+            logger.info(f'{module} 将被载入')
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.info(f"已加载{channel.meta['name']} by {' '.join(channel.meta['author'])}（{module}）")
+    logger.info(f"module: {module}")
+    logger.info(f"name: {channel.meta['name']}")
+    logger.info(f"author: {' '.join(channel.meta['author'])}")
+    logger.info(f"description: {channel.meta['description']}")
 
 logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
 app.launch_blocking()

@@ -17,14 +17,14 @@ from graia.ariadne.event.mirai import NewFriendRequestEvent, BotInvitedJoinGroup
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from loguru import logger
+from graia.saya.channel import ChannelMeta
 
 import botfunc
 
-channel = Channel.current()
-channel.name("自身信息处理")
-channel.description("简称自理")
-channel.author("HanTools")
-
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "自身信息处理"
+channel.meta['description'] = "处理例如加群请求等事件"
+channel.meta['author'] = "KuoHu"
 
 # 好友添加
 @channel.use(

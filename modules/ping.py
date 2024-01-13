@@ -5,13 +5,14 @@ from graia.ariadne.message.parser.base import DetectPrefix
 from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
+from graia.saya.channel import ChannelMeta
 
 import os
 
-channel = Channel.current()
-channel.name("Ping")
-channel.description("PingPing你的")
-channel.author("ltzXiaoYanMo,Emerald-AM9")
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "Ping"
+channel.meta['description'] = "PingPing你的"
+channel.meta['author'] = "ltzXiaoYanMo,Emerald-AM9"
 
 result=os.system(MessageChain)
     MessageChain(os.system.ping(MessageChain))

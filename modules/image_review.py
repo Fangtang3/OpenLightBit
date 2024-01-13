@@ -22,10 +22,10 @@ from tencentcloud.ims.v20201229 import ims_client, models
 import botfunc
 import depen
 
-channel = Channel.current()
-channel.name("图片审核")
-channel.description("你疑似有点太极端了")
-channel.author("HanTools")
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "图片审核"
+channel.meta['description'] = "你疑似有点太极端了"
+channel.meta['author'] = "KuoHu"
 dyn_config = 'dynamic_config.yaml'
 
 

@@ -22,14 +22,14 @@ from graia.ariadne.message.parser.base import DetectPrefix
 from graia.ariadne.model import Group
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
+from graia.saya.channel import ChannelMeta
 
 import botfunc
 
-channel = Channel.current()
-channel.name("echo")
-channel.description("echo 第一个输出")
-channel.author("HanTools,Emerald-AM9")
-
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "Hello World!"
+channel.meta['description'] = "哼哼哼，啊啊啊啊啊"
+channel.meta['author'] = "KuoHu"
 
 @channel.use(
     ListenerSchema(

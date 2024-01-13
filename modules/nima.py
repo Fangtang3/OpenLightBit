@@ -18,11 +18,12 @@ from graia.ariadne.event.message import FriendMessage, TempMessage
 from graia.ariadne.model import Member, Friend
 from graia.ariadne.util.saya import listen
 from graia.saya import Channel
+from graia.saya.channel import ChannelMeta
 
-channel = Channel.current()
-channel.name("如来")
-channel.description("在有人找机器人私聊的时候，如来")
-channel.author("HanTools")
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "如来"
+channel.meta['description'] = "在有人找机器人私聊的时候，如来"
+channel.meta['author'] = "KuoHu"
 
 rutext = botfunc.lbit_conf('rulai').split('\n')
 

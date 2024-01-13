@@ -23,14 +23,14 @@ from graia.ariadne.model import Group
 from graia.ariadne.util.saya import listen
 from graia.ariadne.util.saya import decorate
 from graia.saya import Channel
+from graia.saya.channel import ChannelMeta
 
 import botfunc
 
-channel = Channel.current()
-channel.name("版本查询")
-channel.description("查看设置的机器人版本")
-channel.author("Emerald-AM9")
-
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "版本查询"
+channel.meta['description'] = "查看设置的机器人版本"
+channel.meta['author'] = "Emerald-AM9"
 @listen(GroupMessage)
 @decorate(MatchContent("版本"))
 async def ver(app: Ariadne, group: Group, event: GroupMessage):
