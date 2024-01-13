@@ -20,6 +20,8 @@ from graia.ariadne.util.saya import listen
 from graia.saya import Channel
 from graia.saya.channel import ChannelMeta
 
+import botfunc
+
 channel = Channel[ChannelMeta].current()
 channel.meta['name'] = "如来"
 channel.meta['description'] = "在有人找机器人私聊的时候，如来"
