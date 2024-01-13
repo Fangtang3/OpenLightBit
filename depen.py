@@ -1,10 +1,10 @@
 """
-KHB 常用逻辑判断
+KHB 常用的逻辑判断
 """
 from graia.amnesia.message import MessageChain
 from graia.ariadne import Ariadne
 from graia.ariadne.message.element import At, Plain, Image
-from graia.ariadne.model import Group, Member, MemberPerm
+from graia.ariadne.model import Group, Member, MemberPerm, Friend
 from graia.broadcast.builtin.decorators import Depend
 from graia.broadcast.exceptions import ExecutionStop
 
@@ -84,6 +84,7 @@ def check_authority_op(prompt: bool = True):
 
     return Depend(check_authority)
 
+
 def check_authority_su():
     """
     检查权限是否是机器人主人
@@ -157,6 +158,19 @@ def check_authority_not_black(prompt: bool = True):
                         ]
                     )
                 )
+            raise ExecutionStop
+
+    return Depend(check_authority)
+
+
+def check_authority_member():
+    """
+    检查权限是否是群成员
+    :return: Depend
+    """
+
+    async def check_authority(member: Member):
+        if member.permission != MemberPerm.Member:
             raise ExecutionStop
 
     return Depend(check_authority)

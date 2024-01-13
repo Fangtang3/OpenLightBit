@@ -1,5 +1,3 @@
-#  本项目遵守 AGPL-3.0 协议，项目地址：https://gitee.com/emerald-am9/lightbit
-
 import base64
 import hashlib
 import json
