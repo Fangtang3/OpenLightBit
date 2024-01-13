@@ -19,8 +19,8 @@ import pymysql
 import requests
 from creart import create
 from graia.ariadne.app import Ariadne
-from graia.ariadne.connection.config import HttpClientConfig,
-from graia.ariadne.connection.config import WebsocketClientConfig,
+from graia.ariadne.connection.config import HttpClientConfig
+from graia.ariadne.connection.config import WebsocketClientConfig
 from graia.ariadne.connection.config import config
 from graia.saya import Saya
 from loguru import logger
@@ -29,7 +29,7 @@ from rich.progress import track
 import botfunc
 import cache_var
 
-print ("Starting OpenLightBit 2023.10(Milestone Update)...")
+print ("Starting OpenLightBit 3.2.0(Universe Update)...")
 
 saya = create(Saya)
 app = Ariadne(
@@ -137,7 +137,7 @@ cache_var.sensitive_words = [x[0] for x in cursor.fetchall()]
 if not cache_var.sensitive_words:
     logger.warning('未找到敏感词库！即将从国内源拉取……（请保证能正常访问jsDelivr）')
     # 色情类
-    d.extend
+    d.extend(
         requests.get(
             "https://ghproxy.com/https://github.com/extdomains/cdn.jsdelivr.net/gh/fwwdn/sensitive-stop-words@master/%E8%89%B2%E6%83%85%E7%B1%BB.txt"
         ).text.split(',\n')

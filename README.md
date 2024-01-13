@@ -23,5 +23,5 @@
     - [daizihan233/KuoHuBit](https://github.com/daizihan233/KuoHuBit/)
         - [~~ltzXiaoYanMo/YanBot-KHB_Edition_Older~~](https://github.com/ltzXiaoYanMo/YanBot-KHB_Edition_Older)
         - [ltzXiaoYanMo/YanBot_KHB_Edition](https://github.com/ltzXiaoYanMo/YanBot_KHB_Edition)
-        - [emerald-am9/lightbit](https://gitee.com/emerald-am9/lightbit)
+        - [emerald-am9/lightbit](https://gitee.com/Emerald-AM9/lightbit)
     - [daizihan233/KuoHuShit](https://github.com/daizihan233/KuoHuShit)

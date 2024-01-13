@@ -1,5 +1,5 @@
 #    OpenLightBit-KuoHuBit
-#    Copyright (C) 2023  Emerald-AM9
+#    Copyright (C) 2024  Emerald-AM9
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,9 +17,10 @@ from graia.saya import Channel
 
 import botfunc
 
-channel = Channel.current()
-channel.name("linkbit-olb")
-channel.author("Emerald-AM9")
+channel = Channel[ChannelMeta].current()
+channel.meta['name'] = "Linkbit-OLB"
+channel.meta['description'] = "2kbit兼容模块"
+channel.meta['author'] = "Emerald-AM9"
 
 ops = botfunc.get_all_admin()
 g_ops = botfunc.get_all_admin()
