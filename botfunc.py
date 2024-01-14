@@ -128,9 +128,9 @@ if not pathlib.Path("./openlbit.yml").exists():
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
-bot-ver: "3x"
+bot-ver: "3.2.0"
+changelog: "Nothing here..."
 current-unix-timestamp:
-os-ver: "debian-buster"
 rulai: [
        "第一条",
        "第二条"
@@ -144,7 +144,7 @@ if not pathlib.Path("./openai.json").exists():
     key:
 }
 """)
-    logger.warning('OpenAI.json 已经被程序自动创建，可在 https://openai.ymbot.top 中配置此处的配置')
+    logger.warning('OpenAI.json 已被程序自动创建，可参考 https://openai.ymbot.top 配置此处的配置')
 
 if not pathlib.Path("./data.json").exists():
     safe_file_write('data.json', """{
@@ -156,7 +156,7 @@ if not pathlib.Path("./data.json").exists():
   "cycle_now": 946656000,
   "cycle_temp": 0.00
 }""")
-    logger.warning('data.json 已经被程序自动创建，并且目前看起来没什么用（')
+    logger.warning('data.json 已被程序自动创建')
 
 config_yaml = yaml.safe_load(open('config.yaml', 'r', encoding='UTF-8'))
 cloud_config_json = json.load(open('cloud.json', 'r', encoding='UTF-8'))
