@@ -31,6 +31,8 @@ from rich.progress import track
 import botfunc
 import cache_var
 
+logger.info('Starting OpenLightBit 3.2.0-SNAPSHOT...')
+
 saya = create(Saya)
 app = Ariadne(
     connection=config(
@@ -174,10 +176,7 @@ with saya.module_context():
             saya.require(module)
 
 for module, channel in saya.channels.items():
-    logger.info(f"module: {module}")
-    logger.info(f"name: {channel.meta['name']}")
-    logger.info(f"author: {' '.join(channel.meta['author'])}")
-    logger.info(f"description: {channel.meta['description']}")
+    logger.info(f"加载了{channel.meta['name']}（{module}）by {' '.join(channel.meta['author'])}")
 
 logger.success('恭喜！启动成功，0Error，至少目前如此，也祝你以后如此')
 app.launch_blocking()
