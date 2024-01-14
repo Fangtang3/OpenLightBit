@@ -1,4 +1,4 @@
-# OpenLightBit 2
+# OpenLightBit
 
 一个QQBot | 基于 Mirai  Graia 与 [KuoHuBit](https://github.com/daizihan233/KuoHuBit)<br>
 本项目参照 [Mirai](https://github.com/mamoe/mirai) 的许可证，使用 AGPL-3.0 开源<br>
@@ -108,7 +108,7 @@ ws:
 ```
 则MAH的配置文件部署完毕。
 
-## 配置YanBot
+## 配置OpenLightBit
     
 OpenLightBit与KuoHuBit的配置其实都很简单，都是更改cloud.json和config.yaml文件。最新版本当中需运行main.py才可出现cloud.json文件。
 

@@ -125,6 +125,7 @@ img:
 
 if not pathlib.Path("./openlbit.yml").exists():
     safe_file_write('openlbit.yml', """# OpenLightBit配置文件
+config-version: 1
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
@@ -192,6 +193,11 @@ def lbit_conf(name: str):
     except KeyError:
         logger.error(f'{name} 在配置文件中找不到')
         return None
+
+cfgver = str(lbit_conf('config-version'))
+if int(cfgver) > 1:
+    logger.error(f'openlbit.yml配置文件版本过高，请删除后重新生成')
+    sys.exit(1)
 
 async def select_fetchone(sql, arg=None):
     conn = await aiomysql.connect(host=get_cloud_config('MySQL_Host'),
