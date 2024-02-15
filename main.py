@@ -44,8 +44,8 @@ app = Ariadne(
     ),
 )
 
-# 查看config.yaml中的enable_mysql是否为开启，若开启则使用MySQL，若不是则使用SQLite
-if botfunc.get_config('enable_mysql'):
+# 查看enable-mysql是否为开启，若开启则使用MySQL，若不是则使用SQLite
+if botfunc.lbit_conf('enable-mysql'):
     try:
         conn = pymysql.connect(host=botfunc.get_cloud_config('MySQL_Host'), port=botfunc.get_cloud_config('MySQL_Port'),
                                user=botfunc.get_cloud_config('MySQL_User'),
