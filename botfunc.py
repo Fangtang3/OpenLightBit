@@ -146,7 +146,7 @@ if not pathlib.Path("./openai.json").exists():
     key:
 }
 """)
-    logger.warning('OpenAI.json 已被程序自动创建，可参考 https://openai.ymbot.top 配置此处的配置')
+    logger.warning('OpenAI.json 已被程序自动创建，可参考 https://openai.ymbit.cn 配置此处的配置')
 
 if not pathlib.Path("./data.json").exists():
     safe_file_write('data.json', """{
