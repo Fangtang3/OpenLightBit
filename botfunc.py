@@ -125,12 +125,13 @@ img:
 
 if not pathlib.Path("./openlbit.yml").exists():
     safe_file_write('openlbit.yml', """# OpenLightBit配置文件
-config-version: 1
+config-version: 2
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
-bot-ver: "3.2.0"
+bot-ver: "3.3.0"
 changelog: "Nothing here..."
+enable-mysql: false
 current-unix-timestamp:
 rulai: [
        "第一条",
@@ -195,7 +196,7 @@ def lbit_conf(name: str):
         return None
 
 cfgver = str(lbit_conf('config-version'))
-if int(cfgver) > 1:
+if int(cfgver) > 2:
     logger.error(f'openlbit.yml配置文件版本过高，请删除后重新生成')
     sys.exit(1)
 
