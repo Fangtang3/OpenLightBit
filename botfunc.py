@@ -125,7 +125,7 @@ img:
 
 if not pathlib.Path("./openlbit.yml").exists():
     safe_file_write('openlbit.yml', """# OpenLightBit配置文件
-config-version: 2
+config-version: 3
 api-ip: "0.0.0.0"
 api-port: 8989
 bot-name: "OpenLightBit"
@@ -133,6 +133,8 @@ bot-ver: "3.3.0"
 changelog: "Nothing here..."
 enable-mysql: false
 current-unix-timestamp:
+ai-url:
+ai-key:
 rulai: [
        "第一条",
        "第二条"
@@ -150,13 +152,24 @@ if not pathlib.Path("./openai.json").exists():
 
 if not pathlib.Path("./data.json").exists():
     safe_file_write('data.json', """{
-  "collected_at": 946656000,
+  "collected_at": 0,
+  "cycle_0": 0,
+  "cycle_now": 0,
+  "weather": 0,
+  "weather_until": 0,
   "high_temp_days": 0,
   "day_temp": 0.00,
-  "day_hum": 0.00,
-  "cycle_0": 946656000,
-  "cycle_now": 946656000,
-  "cycle_temp": 0.00
+  "cycle_hum": 0.00,
+  "cycle_temp": 0.00,
+  "temp_multi": 0.00,
+  "fluctuation": 0.00,
+  "last_preci": 0,
+  "preci_chance": 0,
+  "preci_level": 0,
+  "precipitation": 0,
+  "wind_scale": 0,
+  "wind_speed": 0,
+  "wind_direction": 0
 }""")
     logger.warning('data.json 已被程序自动创建')
 
