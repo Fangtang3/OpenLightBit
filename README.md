@@ -11,6 +11,7 @@
 4. MySQL 5.5.3+（MariaDB 10.5已测试，可用）
 5. Redis 4.0.0+
 6. Mirai API HTTP
+7. 已知GNU/Linux glibc平台下Ubuntu 22.04和RHEL 9可用
 
 # 使用方法
 
@@ -27,11 +28,11 @@ Debian/Ubuntu:
 sudo apt-get install -y git
 ```
 
-CentOS/Red Hat:
+CentOS/Red Hat/Fedora（旧版）:
 ```bash
 sudo yum install -y git
 ```
-dnf:
+AlmaLinux/Red Hat/Fedora/Mageia/OpenEuler（新版）:
 ```bash
 sudo dnf install -y git
 ```
@@ -45,10 +46,6 @@ Linux:
 ```bash
 pip3 install pdm 
 ```
-或
-```bash
-pip3.11 install pdm
-```
 若未安装pip，在此目录下输入:
 Windows:
 ```bash
@@ -56,7 +53,7 @@ python get-pip.py
 ```
 Linux：
 ```bash
-python3 get-pip.py 或 pip3.11 get-pip.py
+python3 get-pip.py
 ```
 安装完毕后，进入OpenLightBit的目录，输入pdm install（数据支持来自KuoHu，也就是括弧），即使打“X”也无需慌张。此刻你已经安装完毕了依赖。
 
