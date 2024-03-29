@@ -7,9 +7,9 @@
 
 1. 若使用Windows，请确保使用Windows8.1+
 2. 若使用带有GLIBC的GNU/Linux发行版，请使用GLIBC2.12+（对于32位x86）或GLIBC2.17+（对于64位x86）
-3. Python 3.10+（3.12未测试，理论上可用）
+3. Python 3.10+
 4. MySQL 5.5.3+（MariaDB 10.5已测试，可用）
-5. Redis 4.0.0+
+5. Redis/Valkey 4.0.0+
 6. Mirai API HTTP
 7. 已知GNU/Linux glibc平台下Ubuntu 22.04和RHEL 9可用
 
